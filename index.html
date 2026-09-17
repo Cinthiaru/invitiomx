@@ -1,0 +1,2789 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1D3547">
+  <meta name="description" content="Invitio.mx crea invitaciones digitales elegantes, modernas y personalizadas para bodas, baby showers, fiestas y celebraciones.">
+  <title>Invitio.mx — Invitaciones digitales para momentos especiales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       INVITIO.MX — LIQUID GLASS LANDING
+       Todo el CSS está dentro de este archivo.
+    ========================================================= */
+
+    :root {
+      --navy: #1D3547;
+      --sage: #8BA888;
+      --gold: #D3A85B;
+      --cream: #F0E8D5;
+      --white: #FFFDF8;
+      --text-soft: rgba(29, 53, 71, .68);
+
+      --glass-bg: rgba(255, 255, 255, .34);
+      --glass-border: rgba(255, 255, 255, .62);
+
+      --shadow:
+        0 25px 70px rgba(29, 53, 71, .12),
+        inset 0 1px 0 rgba(255, 255, 255, .7);
+
+      --radius-xl: 38px;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--navy);
+      font-family: "DM Sans", sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 5% 10%,
+          rgba(139, 168, 136, .24),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 95% 18%,
+          rgba(211, 168, 91, .18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(139, 168, 136, .12),
+          transparent 30%
+        ),
+        var(--cream);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(29, 53, 71, .025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(29, 53, 71, .025) 1px,
+          transparent 1px
+        );
+
+      background-size: 55px 55px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================================================
+       AMBIENT BLOBS
+    ========================================================= */
+
+    .ambient {
+      position: fixed;
+      z-index: -5;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(90px);
+      opacity: .42;
+      animation: ambientFloat 12s ease-in-out infinite alternate;
+    }
+
+    .ambient.one {
+      width: 280px;
+      height: 280px;
+      left: -140px;
+      top: 15%;
+      background: var(--sage);
+    }
+
+    .ambient.two {
+      width: 320px;
+      height: 320px;
+      right: -160px;
+      top: 42%;
+      background: var(--gold);
+      animation-delay: -4s;
+    }
+
+    .ambient.three {
+      width: 240px;
+      height: 240px;
+      left: 45%;
+      bottom: -120px;
+      background: #B7C7AD;
+      animation-delay: -7s;
+    }
+
+    @keyframes ambientFloat {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      to {
+        transform: translate3d(35px, -25px, 0) scale(1.12);
+      }
+    }
+
+    /* =========================================================
+       GLASS
+    ========================================================= */
+
+    .glass {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, .55),
+          rgba(255, 255, 255, .18)
+        );
+
+      border: 1px solid var(--glass-border);
+
+      box-shadow: var(--shadow);
+
+      backdrop-filter:
+        blur(25px)
+        saturate(130%);
+
+      -webkit-backdrop-filter:
+        blur(25px)
+        saturate(130%);
+    }
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+      position: fixed;
+      z-index: 100;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: min(1160px, calc(100% - 32px));
+      height: 70px;
+
+      padding: 0 15px 0 22px;
+
+      border-radius: 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      transition: .35s ease;
+    }
+
+    .navbar.scrolled {
+      top: 10px;
+      box-shadow:
+        0 18px 55px rgba(29, 53, 71, .17),
+        inset 0 1px 0 rgba(255, 255, 255, .75);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -.05em;
+    }
+
+    .brand span:last-child span {
+      font-weight: 400;
+      opacity: .65;
+    }
+
+    .brand-mark {
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      color: var(--cream);
+      background: var(--navy);
+
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      font-style: italic;
+
+      box-shadow: 0 8px 22px rgba(29, 53, 71, .2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+
+      color: rgba(29, 53, 71, .7);
+
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -7px;
+
+      height: 1px;
+
+      background: var(--gold);
+
+      transform: scaleX(0);
+      transform-origin: right;
+
+      transition: transform .3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--navy);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 13px 17px;
+
+      border-radius: 14px;
+
+      color: var(--cream);
+      background: var(--navy);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      box-shadow: 0 12px 30px rgba(29, 53, 71, .2);
+
+      transition: .3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 35px rgba(29, 53, 71, .27);
+    }
+
+    .nav-cta span {
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    .menu-toggle {
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border: 0;
+      background: transparent;
+
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+
+      width: 21px;
+      height: 1px;
+
+      margin: 6px auto;
+
+      background: var(--navy);
+
+      transition: .3s ease;
+    }
+
+    /* =========================================================
+       COMMON
+    ========================================================= */
+
+    .section {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+      padding: 125px 0;
+    }
+
+    .section-kicker {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      color: rgba(29, 53, 71, .58);
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+    }
+
+    .section-heading h2 {
+      margin-top: 19px;
+
+      font-family: "Playfair Display", serif;
+      font-size: clamp(43px, 5vw, 68px);
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .section-heading em,
+    h1 em,
+    h2 em {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .centered .section-kicker {
+      justify-content: center;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 850px;
+
+      padding-top: 190px;
+
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      color: rgba(29, 53, 71, .65);
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--sage);
+
+      box-shadow:
+        0 0 0 6px rgba(139, 168, 136, .15);
+
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        box-shadow:
+          0 0 0 11px rgba(139, 168, 136, 0);
+      }
+    }
+
+    .hero h1 {
+      margin: 25px 0 28px;
+
+      max-width: 780px;
+
+      font-family: "Playfair Display", serif;
+      font-size: clamp(52px, 6.4vw, 84px);
+      font-weight: 500;
+      line-height: .96;
+      letter-spacing: -.065em;
+    }
+
+    .hero-text {
+      max-width: 570px;
+
+      color: var(--text-soft);
+
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+
+      min-height: 50px;
+
+      padding: 0 20px;
+
+      border-radius: 15px;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      transition: .3s ease;
+    }
+
+    .button-primary {
+      color: var(--cream);
+      background: var(--navy);
+
+      box-shadow:
+        0 15px 35px rgba(29, 53, 71, .2);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 20px 42px rgba(29, 53, 71, .28);
+    }
+
+    .button-primary span {
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    .button-ghost {
+      border: 1px solid rgba(29, 53, 71, .15);
+      background: rgba(255, 255, 255, .14);
+    }
+
+    .button-ghost:hover {
+      background: rgba(255, 255, 255, .4);
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      margin-top: 43px;
+    }
+
+    .avatars {
+      display: flex;
+    }
+
+    .avatars span {
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      margin-left: -7px;
+
+      border: 2px solid var(--cream);
+      border-radius: 50%;
+
+      color: var(--navy);
+      background: var(--sage);
+
+      font-size: 11px;
+    }
+
+    .avatars span:first-child {
+      margin-left: 0;
+
+      color: var(--gold);
+      background: var(--navy);
+    }
+
+    .hero-note strong,
+    .hero-note small {
+      display: block;
+    }
+
+    .hero-note strong {
+      font-size: 11px;
+    }
+
+    .hero-note small {
+      margin-top: 3px;
+
+      color: rgba(29, 53, 71, .52);
+
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       HERO INVITATION MOCKUP
+    ========================================================= */
+
+    .hero-visual {
+      position: relative;
+
+      height: 590px;
+
+      display: grid;
+      place-items: center;
+
+      perspective: 1000px;
+    }
+
+    .invitation-card {
+      position: relative;
+
+      width: min(390px, 80%);
+      height: 520px;
+
+      padding: 22px;
+
+      overflow: hidden;
+
+      border-radius: 34px;
+
+      transform: rotate(3deg);
+
+      color: var(--navy);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 253, 248, .84),
+          rgba(255, 255, 255, .25)
+        );
+
+      transition: transform .5s ease;
+    }
+
+    .hero-visual:hover .invitation-card {
+      transform:
+        rotate(0deg)
+        translateY(-8px);
+    }
+
+    .invitation-card::before {
+      content: "";
+
+      position: absolute;
+      inset: 12px;
+
+      border: 1px solid rgba(29, 53, 71, .13);
+      border-radius: 27px;
+
+      pointer-events: none;
+    }
+
+    .card-shine {
+      position: absolute;
+
+      width: 180px;
+      height: 500px;
+
+      top: -190px;
+      right: -90px;
+
+      background: rgba(255, 255, 255, .45);
+
+      transform: rotate(28deg);
+
+      filter: blur(25px);
+    }
+
+    .mini-top,
+    .mini-bottom {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .16em;
+
+      opacity: .52;
+    }
+
+    .invitation-content {
+      position: relative;
+      z-index: 2;
+
+      height: 440px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      text-align: center;
+    }
+
+    .tiny-label {
+      margin-bottom: 29px;
+
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .28em;
+    }
+
+    .invitation-content h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 64px;
+      font-weight: 500;
+      line-height: .78;
+      letter-spacing: -.065em;
+    }
+
+    .invitation-content h2 i {
+      display: block;
+
+      margin: 8px 0;
+
+      color: var(--gold);
+
+      font-size: 27px;
+      line-height: 1;
+    }
+
+    .date-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin: 31px 0 22px;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .22em;
+    }
+
+    .date-line span {
+      width: 22px;
+      height: 1px;
+
+      background: var(--gold);
+    }
+
+    .invitation-content p {
+      font-family: "Playfair Display", serif;
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.6;
+
+      opacity: .63;
+    }
+
+    .invitation-content button {
+      margin-top: 29px;
+
+      padding: 10px 14px;
+
+      border: 1px solid rgba(29, 53, 71, .16);
+      border-radius: 10px;
+
+      color: var(--navy);
+      background: rgba(255, 255, 255, .25);
+
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .15em;
+    }
+
+    /* =========================================================
+       FLOATING CARDS
+    ========================================================= */
+
+    .floating-card {
+      position: absolute;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 13px 16px;
+
+      border-radius: 18px;
+
+      transition: transform .4s ease;
+    }
+
+    .float-one {
+      top: 23%;
+      right: 1%;
+
+      transform: rotate(-4deg);
+    }
+
+    .float-two {
+      left: 1%;
+      bottom: 18%;
+
+      transform: rotate(4deg);
+    }
+
+    .hero-visual:hover .float-one {
+      transform: rotate(-2deg) translateY(-7px);
+    }
+
+    .hero-visual:hover .float-two {
+      transform: rotate(2deg) translateY(7px);
+    }
+
+    .float-icon {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      color: var(--gold);
+      background: var(--navy);
+
+      font-size: 13px;
+    }
+
+    .float-icon.sage {
+      color: var(--navy);
+      background: var(--sage);
+    }
+
+    .floating-card strong,
+    .floating-card small {
+      display: block;
+    }
+
+    .floating-card strong {
+      font-size: 12px;
+    }
+
+    .floating-card small {
+      margin-top: 2px;
+
+      color: rgba(29, 53, 71, .52);
+
+      font-size: 9px;
+    }
+
+    /* =========================================================
+       MARQUEE
+    ========================================================= */
+
+    .marquee-wrap {
+      width: 104%;
+      margin-left: -2%;
+
+      padding: 19px 0;
+
+      overflow: hidden;
+
+      border-top: 1px solid rgba(29, 53, 71, .1);
+      border-bottom: 1px solid rgba(29, 53, 71, .1);
+
+      transform: rotate(-1deg);
+    }
+
+    .marquee {
+      display: flex;
+      align-items: center;
+      gap: 31px;
+
+      width: max-content;
+
+      white-space: nowrap;
+
+      animation: marquee 28s linear infinite;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+
+    .marquee i {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 100px;
+
+      margin-top: 70px;
+    }
+
+    .intro-text .large {
+      margin-bottom: 23px;
+
+      color: var(--navy);
+
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      line-height: 1.5;
+    }
+
+    .intro-text p:not(.large) {
+      color: var(--text-soft);
+
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .text-link {
+      display: inline-flex;
+      gap: 12px;
+
+      margin-top: 25px;
+      padding-bottom: 7px;
+
+      border-bottom: 1px solid var(--gold);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .feature-stack {
+      display: grid;
+      gap: 13px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 55px 1fr 30px;
+      align-items: center;
+      gap: 15px;
+
+      padding: 22px;
+
+      border-radius: 20px;
+
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 25px 55px rgba(29, 53, 71, .16);
+    }
+
+    .feature-number {
+      color: var(--gold);
+
+      font-family: "Playfair Display", serif;
+      font-size: 21px;
+    }
+
+    .feature h3 {
+      margin-bottom: 4px;
+
+      font-family: "Playfair Display", serif;
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .feature p {
+      color: rgba(29, 53, 71, .55);
+
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .feature-arrow {
+      color: rgba(29, 53, 71, .45);
+      font-size: 18px;
+    }
+
+    /* =========================================================
+       EVENTS
+    ========================================================= */
+
+    .events {
+      padding-top: 80px;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+
+      margin-top: 65px;
+    }
+
+    .event-card {
+      position: relative;
+
+      height: 430px;
+
+      padding: 26px;
+
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      isolation: isolate;
+
+      border-radius: 28px;
+
+      color: var(--white);
+
+      transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 65px rgba(29, 53, 71, .2);
+    }
+
+    .event-card::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      z-index: -2;
+
+      background:
+        linear-gradient(
+          145deg,
+          #526F67,
+          #A8B8A0
+        );
+    }
+
+    .event-card.baby::before {
+      background:
+        linear-gradient(
+          145deg,
+          #9C8D7C,
+          #D6C3AB
+        );
+    }
+
+    .event-card.party::before {
+      background:
+        linear-gradient(
+          145deg,
+          #263F4D,
+          #8D7052
+        );
+    }
+
+    .event-card::after {
+      content: "";
+
+      position: absolute;
+      z-index: -1;
+
+      inset: 14%;
+
+      border: 1px solid rgba(255, 255, 255, .28);
+
+      border-radius: 45% 55% 50% 42%;
+
+      transform: rotate(-8deg);
+
+      transition: .6s ease;
+    }
+
+    .event-card:hover::after {
+      transform: rotate(5deg) scale(1.04);
+    }
+
+    .event-overlay {
+      position: absolute;
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, .05),
+          rgba(0, 0, 0, .46)
+        );
+    }
+
+    .event-index {
+      font-size: 9px;
+      letter-spacing: .16em;
+      opacity: .72;
+    }
+
+    .event-icon {
+      position: absolute;
+
+      top: 45%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      color: #F3DFAC;
+
+      font-family: "Playfair Display", serif;
+      font-size: 45px;
+    }
+
+    .event-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      opacity: .7;
+    }
+
+    .event-card h3 {
+      margin: 7px 0;
+
+      font-family: "Playfair Display", serif;
+      font-size: 39px;
+      font-weight: 500;
+      line-height: .95;
+    }
+
+    .event-card p {
+      font-size: 10px;
+      opacity: .73;
+    }
+
+    /* =========================================================
+       PROCESS
+    ========================================================= */
+
+    .process-card {
+      display: grid;
+      grid-template-columns: .65fr 1.35fr;
+      gap: 80px;
+
+      padding: 70px;
+
+      border-radius: var(--radius-xl);
+    }
+
+    .process-heading h2 {
+      margin: 18px 0;
+
+      font-family: "Playfair Display", serif;
+      font-size: 55px;
+      font-weight: 500;
+      line-height: .96;
+      letter-spacing: -.05em;
+    }
+
+    .process-heading p {
+      max-width: 300px;
+
+      color: rgba(29, 53, 71, .57);
+
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      min-height: 210px;
+
+      padding-left: 20px;
+
+      border-left: 1px solid rgba(29, 53, 71, .14);
+    }
+
+    .step > span {
+      color: var(--gold);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      margin: 45px 0 10px;
+
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .step p {
+      color: rgba(29, 53, 71, .57);
+
+      font-size: 10px;
+      line-height: 1.75;
+    }
+
+    /* =========================================================
+       PLANS
+    ========================================================= */
+
+    .plans {
+      padding-bottom: 90px;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+
+      margin-top: 60px;
+    }
+
+    .plan {
+      position: relative;
+
+      min-height: 455px;
+
+      padding: 35px;
+
+      overflow: hidden;
+
+      border-radius: 27px;
+
+      transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+    }
+
+    .plan:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 30px 70px rgba(29, 53, 71, .17);
+    }
+
+    .plan-top {
+      display: flex;
+      justify-content: space-between;
+
+      color: rgba(29, 53, 71, .52);
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .15em;
+    }
+
+    .plan h3 {
+      margin: 60px 0 12px;
+
+      font-family: "Playfair Display", serif;
+      font-size: 46px;
+      font-weight: 500;
+    }
+
+    .plan-description {
+      max-width: 420px;
+
+      color: rgba(29, 53, 71, .61);
+
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .plan ul {
+      display: grid;
+      gap: 9px;
+
+      margin-top: 28px;
+
+      list-style: none;
+
+      font-size: 10px;
+    }
+
+    .plan li::before {
+      content: "✓";
+
+      margin-right: 10px;
+
+      color: var(--sage);
+
+      font-weight: 700;
+    }
+
+    .plan-link {
+      position: absolute;
+      left: 35px;
+      bottom: 32px;
+
+      padding-bottom: 7px;
+
+      border-bottom: 1px solid var(--gold);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .plan-link span {
+      margin-left: 15px;
+      color: var(--gold);
+      font-size: 15px;
+    }
+
+    .plan-featured {
+      color: var(--cream);
+
+      background:
+        radial-gradient(
+          circle at 80% 10%,
+          rgba(139, 168, 136, .3),
+          transparent 32%
+        ),
+        linear-gradient(
+          140deg,
+          rgba(29, 53, 71, .96),
+          rgba(29, 53, 71, .78)
+        );
+
+      border-color: rgba(255, 255, 255, .2);
+    }
+
+    .plan-featured .plan-top,
+    .plan-featured .plan-description {
+      color: var(--cream);
+      opacity: .65;
+    }
+
+    .plan-featured li::before {
+      color: var(--gold);
+    }
+
+    .featured-tag {
+      position: absolute;
+
+      top: 20px;
+      right: 20px;
+
+      padding: 7px 11px;
+
+      border-radius: 100px;
+
+      color: var(--navy);
+      background: var(--gold);
+
+      font-size: 7px;
+      font-weight: 800;
+      letter-spacing: .15em;
+    }
+
+    /* =========================================================
+       QUOTE
+    ========================================================= */
+
+    .quote-section {
+      padding-top: 20px;
+      padding-bottom: 125px;
+    }
+
+    .quote {
+      position: relative;
+
+      padding: 90px 30px;
+
+      overflow: hidden;
+
+      text-align: center;
+
+      border-radius: 35px;
+    }
+
+    .quote::before {
+      content: "";
+
+      position: absolute;
+
+      width: 270px;
+      height: 270px;
+
+      left: 10%;
+      top: -130px;
+
+      border-radius: 50%;
+
+      background: var(--sage);
+
+      opacity: .12;
+
+      filter: blur(30px);
+    }
+
+    .quote::after {
+      content: "";
+
+      position: absolute;
+
+      width: 230px;
+      height: 230px;
+
+      right: 7%;
+      bottom: -150px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      opacity: .1;
+
+      filter: blur(25px);
+    }
+
+    .quote-mark {
+      color: var(--gold);
+
+      font-family: "Playfair Display", serif;
+      font-size: 62px;
+
+      line-height: .5;
+    }
+
+    blockquote {
+      max-width: 760px;
+
+      margin: 25px auto;
+
+      font-family: "Playfair Display", serif;
+      font-size: clamp(36px, 4vw, 58px);
+      font-weight: 500;
+      line-height: 1.07;
+      letter-spacing: -.05em;
+    }
+
+    .quote-brand {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      opacity: .5;
+    }
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact {
+      padding-top: 0;
+    }
+
+    .contact-card {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 1fr .75fr;
+      gap: 50px;
+
+      padding: 65px;
+
+      overflow: hidden;
+
+      border-radius: 35px;
+
+      color: var(--cream);
+      background: var(--navy);
+    }
+
+    .contact-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 480px;
+      height: 480px;
+
+      right: -170px;
+      top: -270px;
+
+      border: 1px solid rgba(211, 168, 91, .3);
+      border-radius: 50%;
+    }
+
+    .contact-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      right: 20%;
+      bottom: -250px;
+
+      border: 1px solid rgba(139, 168, 136, .2);
+      border-radius: 50%;
+    }
+
+    .contact-card h2 {
+      margin: 20px 0;
+
+      font-family: "Playfair Display", serif;
+      font-size: 70px;
+      font-weight: 500;
+      line-height: .91;
+      letter-spacing: -.06em;
+    }
+
+    .contact-card p {
+      max-width: 440px;
+
+      color: rgba(240, 232, 213, .63);
+
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .contact-actions {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .button-light {
+      color: var(--navy);
+      background: var(--cream);
+    }
+
+    .button-light:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .18);
+    }
+
+    .social-link {
+      padding-bottom: 5px;
+
+      border-bottom: 1px solid rgba(211, 168, 91, .45);
+
+      color: var(--gold);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .contact-actions small {
+      color: rgba(240, 232, 213, .42);
+      font-size: 9px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      width: min(1180px, calc(100% - 48px));
+
+      margin: auto;
+      padding: 35px 0 45px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      border-top: 1px solid rgba(29, 53, 71, .12);
+
+      color: rgba(29, 53, 71, .65);
+
+      font-size: 10px;
+    }
+
+    .footer-brand {
+      font-size: 17px;
+    }
+
+    .footer-brand .brand-mark {
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(28px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: .12s;
+    }
+
+    .delay-2 {
+      transition-delay: .22s;
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta {
+        margin-left: auto;
+        margin-right: 7px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links.mobile-open {
+        position: absolute;
+
+        top: 78px;
+        left: 0;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        padding: 10px;
+
+        border-radius: 20px;
+
+        background: rgba(240, 232, 213, .82);
+
+        border: 1px solid rgba(255, 255, 255, .6);
+
+        box-shadow: var(--shadow);
+
+        backdrop-filter: blur(25px);
+      }
+
+      .nav-links.mobile-open a {
+        padding: 14px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+
+        padding-top: 145px;
+
+        gap: 25px;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      .hero-visual {
+        height: 570px;
+      }
+
+      .intro-grid,
+      .process-card,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-grid {
+        gap: 55px;
+      }
+
+      .process-card {
+        gap: 55px;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .event-card:last-child {
+        grid-column: span 2;
+      }
+
+      .contact-card {
+        gap: 45px;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .section {
+        width: calc(100% - 30px);
+        padding: 90px 0;
+      }
+
+      .navbar {
+        top: 10px;
+
+        width: calc(100% - 20px);
+        height: 62px;
+
+        padding-left: 15px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 115px;
+      }
+
+      .hero h1 {
+        font-size: 49px;
+      }
+
+      .hero-text {
+        font-size: 14px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        height: 510px;
+      }
+
+      .invitation-card {
+        width: 78%;
+        height: 445px;
+      }
+
+      .invitation-content {
+        height: 370px;
+      }
+
+      .invitation-content h2 {
+        font-size: 49px;
+      }
+
+      .float-one {
+        right: -2%;
+        top: 19%;
+      }
+
+      .float-two {
+        left: -3%;
+        bottom: 12%;
+      }
+
+      .section-heading h2 {
+        font-size: 43px;
+      }
+
+      .intro-text .large {
+        font-size: 21px;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .event-card,
+      .event-card:last-child {
+        grid-column: auto;
+        height: 390px;
+      }
+
+      .process-card {
+        padding: 38px 25px;
+      }
+
+      .process-heading h2 {
+        font-size: 45px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .step {
+        min-height: auto;
+        padding-bottom: 20px;
+      }
+
+      .step h3 {
+        margin: 15px 0 8px;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plan {
+        min-height: 470px;
+        padding: 29px;
+      }
+
+      .plan h3 {
+        font-size: 41px;
+      }
+
+      .plan-link {
+        left: 29px;
+      }
+
+      .quote {
+        padding: 70px 20px;
+      }
+
+      blockquote {
+        font-size: 36px;
+      }
+
+      .contact-card {
+        padding: 40px 25px;
+      }
+
+      .contact-card h2 {
+        font-size: 56px;
+      }
+
+      .contact-actions {
+        margin-top: 5px;
+      }
+
+      footer {
+        width: calc(100% - 30px);
+
+        flex-wrap: wrap;
+      }
+
+      footer p {
+        order: 3;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- FONDOS AMBIENTALES -->
+
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
+  <div class="ambient three"></div>
+
+  <!-- =======================================================
+       NAVBAR
+  ======================================================== -->
+
+  <header class="navbar glass" id="navbar">
+
+```
+<a href="#inicio" class="brand">
+  <span class="brand-mark">i</span>
+  <span>invitio<span>.mx</span></span>
+</a>
+
+<nav class="nav-links" id="navLinks">
+  <a href="#servicios">Servicios</a>
+  <a href="#eventos">Eventos</a>
+  <a href="#proceso">Cómo funciona</a>
+  <a href="#planes">Planes</a>
+</nav>
+
+<a href="#contacto" class="nav-cta">
+  Crear mi invitación
+  <span>↗</span>
+</a>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+  <span></span>
+  <span></span>
+</button>
+```
+
+  </header>
+
+  <main id="inicio">
+
+```
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="section hero">
+
+  <div class="hero-copy reveal">
+
+    <div class="eyebrow">
+      <span class="pulse"></span>
+      INVITACIONES DIGITALES · XALAPA, VERACRUZ
+    </div>
+
+    <h1>
+      Tu momento merece
+      <br>
+      <em>una invitación</em> especial.
+    </h1>
+
+    <p class="hero-text">
+      Diseñamos invitaciones digitales elegantes, modernas y 100% responsivas
+      para que compartas tu celebración de una forma única.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#planes" class="button button-primary">
+        Ver invitaciones
+        <span>→</span>
+      </a>
+
+      <a href="#proceso" class="button button-ghost">
+        Descubre cómo funciona
+      </a>
+
+    </div>
+
+    <div class="hero-note">
+
+      <div class="avatars">
+        <span>♡</span>
+        <span>✦</span>
+        <span>∞</span>
+      </div>
+
+      <div>
+        <strong>Hechas para celebrar</strong>
+        <small>
+          Desde una idea hasta una invitación única.
+        </small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MOCKUP -->
+
+  <div class="hero-visual reveal delay-1">
+
+    <div class="invitation-card glass">
+
+      <div class="card-shine"></div>
+
+      <div class="mini-top">
+        <span>INVITATION</span>
+        <span>01 / 26</span>
+      </div>
+
+      <div class="invitation-content">
+
+        <div class="tiny-label">
+          SAVE THE DATE
+        </div>
+
+        <h2>
+          María
+          <i>&</i>
+          Alejandro
+        </h2>
+
+        <div class="date-line">
+          <span></span>
+          18 · 07 · 2027
+          <span></span>
+        </div>
+
+        <p>
+          Una historia que comienza
+          <br>
+          con un sí.
+        </p>
+
+        <button>
+          VER INVITACIÓN
+        </button>
+
+      </div>
+
+      <div class="mini-bottom">
+        <span>INVITIO.MX</span>
+        <span>♡</span>
+      </div>
+
+    </div>
+
+
+    <div class="floating-card glass float-one">
+
+      <span class="float-icon">
+        ✦
+      </span>
+
+      <div>
+        <strong>100%</strong>
+        <small>Responsiva</small>
+      </div>
+
+    </div>
+
+
+    <div class="floating-card glass float-two">
+
+      <span class="float-icon sage">
+        ↗
+      </span>
+
+      <div>
+        <strong>Rápida</strong>
+        <small>Entrega digital</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MARQUEE
+====================================================== -->
+
+<div class="marquee-wrap">
+
+  <div class="marquee">
+
+    <span>BODAS</span>
+    <i>✦</i>
+
+    <span>BABY SHOWERS</span>
+    <i>✦</i>
+
+    <span>FIESTAS</span>
+    <i>✦</i>
+
+    <span>CELEBRACIONES</span>
+    <i>✦</i>
+
+    <span>BODAS</span>
+    <i>✦</i>
+
+    <span>BABY SHOWERS</span>
+    <i>✦</i>
+
+    <span>FIESTAS</span>
+    <i>✦</i>
+
+    <span>CELEBRACIONES</span>
+    <i>✦</i>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     SERVICIOS
+====================================================== -->
+
+<section class="section intro" id="servicios">
+
+  <div class="section-heading reveal">
+
+    <span class="section-kicker">
+      01 — LO QUE HACEMOS
+    </span>
+
+    <h2>
+      Una invitación no solo
+      <br>
+      informa. <em>Emociona.</em>
+    </h2>
+
+  </div>
+
+
+  <div class="intro-grid">
+
+    <div class="intro-text reveal">
+
+      <p class="large">
+        En <strong>Invitio.mx</strong> convertimos los detalles de tu evento
+        en una experiencia digital que tus invitados querrán abrir,
+        explorar y recordar.
+      </p>
+
+      <p>
+        Puedes elegir entre nuestras plantillas prediseñadas o contarnos
+        tu idea para crear algo desde cero. Tú compartes los datos de tu
+        celebración; nosotros nos encargamos del diseño.
+      </p>
+
+      <a href="#contacto" class="text-link">
+        Cuéntanos tu idea
+        <span>↗</span>
+      </a>
+
+    </div>
+
+
+    <div class="feature-stack">
+
+      <article class="feature glass reveal">
+
+        <div class="feature-number">
+          01
+        </div>
+
+        <div>
+          <h3>
+            Diseño personalizado
+          </h3>
+
+          <p>
+            Detalles pensados alrededor de tu evento y tu estilo.
+          </p>
+        </div>
+
+        <span class="feature-arrow">
+          ↗
+        </span>
+
+      </article>
+
+
+      <article class="feature glass reveal delay-1">
+
+        <div class="feature-number">
+          02
+        </div>
+
+        <div>
+          <h3>
+            100% responsiva
+          </h3>
+
+          <p>
+            Se adapta perfectamente a celular, tablet y computadora.
+          </p>
+        </div>
+
+        <span class="feature-arrow">
+          ↗
+        </span>
+
+      </article>
+
+
+      <article class="feature glass reveal delay-2">
+
+        <div class="feature-number">
+          03
+        </div>
+
+        <div>
+          <h3>
+            Todo digital
+          </h3>
+
+          <p>
+            Un proceso simple, rápido y sin trámites complicados.
+          </p>
+        </div>
+
+        <span class="feature-arrow">
+          ↗
+        </span>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EVENTOS
+====================================================== -->
+
+<section class="section events" id="eventos">
+
+  <div class="section-heading centered reveal">
+
+    <span class="section-kicker">
+      02 — PARA CADA OCASIÓN
+    </span>
+
+    <h2>
+      Hay momentos que merecen
+      <br>
+      <em>una entrada especial.</em>
+    </h2>
+
+  </div>
+
+
+  <div class="event-grid">
+
+    <article class="event-card wedding reveal">
+
+      <div class="event-overlay"></div>
+
+      <span class="event-index">
+        01
+      </span>
+
+      <div class="event-icon">
+        ♡
+      </div>
+
+      <div>
+        <span class="event-label">
+          PARA DECIR
+        </span>
+
+        <h3>
+          “Sí, acepto.”
+        </h3>
+
+        <p>
+          Invitaciones para bodas
+        </p>
+      </div>
+
+    </article>
+
+
+    <article class="event-card baby reveal delay-1">
+
+      <div class="event-overlay"></div>
+
+      <span class="event-index">
+        02
+      </span>
+
+      <div class="event-icon">
+        ✦
+      </div>
+
+      <div>
+        <span class="event-label">
+          PARA DAR LA
+        </span>
+
+        <h3>
+          Bienvenida
+        </h3>
+
+        <p>
+          Baby showers y bautizos
+        </p>
+      </div>
+
+    </article>
+
+
+    <article class="event-card party reveal delay-2">
+
+      <div class="event-overlay"></div>
+
+      <span class="event-index">
+        03
+      </span>
+
+      <div class="event-icon">
+        ✧
+      </div>
+
+      <div>
+        <span class="event-label">
+          PARA CELEBRAR
+        </span>
+
+        <h3>
+          A lo grande.
+        </h3>
+
+        <p>
+          Fiestas y celebraciones
+        </p>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROCESO
+====================================================== -->
+
+<section class="section process" id="proceso">
+
+  <div class="process-card glass reveal">
+
+    <div class="process-heading">
+
+      <span class="section-kicker">
+        03 — ASÍ DE SIMPLE
+      </span>
+
+      <h2>
+        De tu idea
+        <br>
+        <em>a tu invitación.</em>
+      </h2>
+
+      <p>
+        Sin procesos complicados. Solo comparte los detalles
+        y nosotros hacemos el resto.
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+      <div class="step">
+
+        <span>01</span>
+
+        <h3>
+          Cuéntanos
+        </h3>
+
+        <p>
+          Comparte los datos, fecha, ubicación y estilo
+          de tu evento.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <span>02</span>
+
+        <h3>
+          Diseñamos
+        </h3>
+
+        <p>
+          Elegimos una plantilla o creamos una propuesta
+          desde cero.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <span>03</span>
+
+        <h3>
+          Publicamos
+        </h3>
+
+        <p>
+          Recibes tu invitación digital lista para compartir.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PLANES
+====================================================== -->
+
+<section class="section plans" id="planes">
+
+  <div class="section-heading reveal">
+
+    <span class="section-kicker">
+      04 — ELIGE TU ESTILO
+    </span>
+
+    <h2>
+      Una invitación hecha
+      <br>
+      <em>para ti.</em>
+    </h2>
+
+  </div>
+
+
+  <div class="plans-grid">
+
+    <article class="plan glass reveal">
+
+      <div class="plan-top">
+        <span>PLANTILLA</span>
+        <b>01</b>
+      </div>
+
+      <h3>
+        Esencial
+      </h3>
+
+      <p class="plan-description">
+        Parte de un diseño prediseñado y personalízalo
+        con la información de tu evento.
+      </p>
+
+      <ul>
+        <li>Diseño prediseñado</li>
+        <li>Información personalizada</li>
+        <li>Diseño responsivo</li>
+        <li>Entrega digital</li>
+      </ul>
+
+      <a href="#contacto" class="plan-link">
+        Quiero este estilo
+        <span>→</span>
+      </a>
+
+    </article>
+
+
+    <article class="plan plan-featured glass reveal delay-1">
+
+      <div class="featured-tag">
+        A TU MEDIDA
+      </div>
+
+      <div class="plan-top">
+        <span>PERSONALIZADA</span>
+        <b>02</b>
+      </div>
+
+      <h3>
+        Signature
+      </h3>
+
+      <p class="plan-description">
+        Cuéntanos tu idea y creamos una experiencia digital
+        desde cero alrededor de tu celebración.
+      </p>
+
+      <ul>
+        <li>Diseño desde cero</li>
+        <li>Concepto personalizado</li>
+        <li>100% responsiva</li>
+        <li>Experiencia digital a medida</li>
+      </ul>
+
+      <a href="#contacto" class="plan-link">
+        Crear mi invitación
+        <span>→</span>
+      </a>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FRASE
+====================================================== -->
+
+<section class="section quote-section">
+
+  <div class="quote glass reveal">
+
+    <span class="quote-mark">
+      “
+    </span>
+
+    <blockquote>
+      Los momentos especiales
+      <br>
+      comienzan con una invitación.
+    </blockquote>
+
+    <span class="quote-brand">
+      INVITIO.MX
+    </span>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACTO
+====================================================== -->
+
+<section class="section contact" id="contacto">
+
+  <div class="contact-card reveal">
+
+    <div>
+
+      <span class="section-kicker">
+        05 — HABLEMOS
+      </span>
+
+      <h2>
+        ¿Ya tienes
+        <br>
+        <em>una idea?</em>
+      </h2>
+
+      <p>
+        Cuéntanos qué estás celebrando y empecemos
+        a crear tu invitación.
+      </p>
+
+    </div>
+
+
+    <div class="contact-actions">
+
+      <a
+        href="mailto:invitiomx@gmail.com"
+        class="button button-light"
+      >
+        Escribir por email
+        <span>↗</span>
+      </a>
+
+      <a
+        href="https://www.instagram.com/invitio.mx"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        Instagram
+        <span>↗</span>
+      </a>
+
+      <small>
+        Atención digital · 24 horas · 7 días
+      </small>
+
+    </div>
+
+  </div>
+
+</section>
+```
+
+  </main>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+```
+<div class="footer-brand">
+
+  <span class="brand-mark">
+    i
+  </span>
+
+  <span>
+    invitio<span>.mx</span>
+  </span>
+
+</div>
+
+<p>
+  Invitaciones digitales para momentos inolvidables.
+</p>
+
+<span>
+  © <span id="year"></span> Invitio.mx
+</span>
+```
+
+  </footer>
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =========================================================
+       NAVBAR — SCROLL
+    ========================================================= */
+
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+
+      navLinks.classList.toggle("mobile-open");
+
+      menuToggle.classList.toggle("active");
+
+    });
+
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("mobile-open");
+        menuToggle.classList.remove("active");
+
+      });
+
+    });
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    const revealObserver = new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .12
+      }
+    );
+
+
+    document.querySelectorAll(".reveal").forEach(element => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+    /* =========================================================
+       TILT EFFECT — EVENT CARDS
+    ========================================================= */
+
+    document.querySelectorAll(".event-card, .plan, .feature")
+      .forEach(card => {
+
+        card.addEventListener("mousemove", event => {
+
+          if (window.innerWidth < 800) return;
+
+          const rect = card.getBoundingClientRect();
+
+          const x =
+            (event.clientX - rect.left) /
+            rect.width -
+            .5;
+
+          const y =
+            (event.clientY - rect.top) /
+            rect.height -
+            .5;
+
+          card.style.transform = `
+            perspective(900px)
+            rotateX(${y * -3}deg)
+            rotateY(${x * 3}deg)
+            translateY(-5px)
+          `;
+
+        });
+
+
+        card.addEventListener("mouseleave", () => {
+
+          card.style.transform = "";
+
+        });
+
+      });
+
+
+    /* =========================================================
+       PARALLAX SUAVE DEL HERO
+    ========================================================= */
+
+    const heroVisual =
+      document.querySelector(".hero-visual");
+
+    window.addEventListener("mousemove", event => {
+
+      if (!heroVisual || window.innerWidth < 900) return;
+
+      const x =
+        (event.clientX / window.innerWidth - .5) * 10;
+
+      const y =
+        (event.clientY / window.innerHeight - .5) * 10;
+
+      heroVisual.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+    });
+
+
+    /* =========================================================
+       AÑO AUTOMÁTICO
+    ========================================================= */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* =========================================================
+       SUAVIZAR ANCLAS
+    ========================================================= */
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+      anchor.addEventListener("click", function(event) {
+
+        const target =
+          document.querySelector(this.getAttribute("href"));
+
+        if (!target) return;
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
