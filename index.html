@@ -976,64 +976,24 @@
         box-shadow .45s ease;
     }
 
+    .event-card.wedding {
+      background-image: url('pexels-wr-heustis-310270240-32195684.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .event-card.baby {
+      background-image: url('pexels-jonathanborba-37385721.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .event-card.party {
+      background-image: url('pexels-marina-abrosimova-3319804-10252631.jpg');
+      background-size: cover;
+      background-position: center;
+    }
     .event-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 28px 65px rgba(29, 53, 71, .2);
-    }
-
-    .event-card::before {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      z-index: -2;
-
-      background:
-        linear-gradient(
-          145deg,
-          #526F67,
-          #A8B8A0
-        );
-    }
-
-    .event-card.baby::before {
-      background:
-        linear-gradient(
-          145deg,
-          #9C8D7C,
-          #D6C3AB
-        );
-    }
-
-    .event-card.party::before {
-      background:
-        linear-gradient(
-          145deg,
-          #263F4D,
-          #8D7052
-        );
-    }
-
-    .event-card::after {
-      content: "";
-
-      position: absolute;
-      z-index: -1;
-
-      inset: 14%;
-
-      border: 1px solid rgba(255, 255, 255, .28);
-
-      border-radius: 45% 55% 50% 42%;
-
-      transform: rotate(-8deg);
-
-      transition: .6s ease;
-    }
-
-    .event-card:hover::after {
-      transform: rotate(5deg) scale(1.04);
     }
 
     .event-overlay {
@@ -2177,29 +2137,13 @@
   <div class="event-grid">
 
     <article class="event-card wedding reveal">
-
       <div class="event-overlay"></div>
-
-      <span class="event-index">
-        01
-      </span>
-
-      <div class="event-icon">
-        ♡
-      </div>
+      <span class="event-index"></span>
 
       <div>
-        <span class="event-label">
-          PARA DECIR
-        </span>
-
-        <h3>
-          “Sí, acepto.”
-        </h3>
-
-        <p>
-          Invitaciones para bodas
-        </p>
+        <span class="event-label"> PARA DECIR</span>
+        <h3>“Sí, acepto.”</h3>
+        <p> Invitaciones para bodas </p>
       </div>
 
     </article>
@@ -2208,14 +2152,7 @@
     <article class="event-card baby reveal delay-1">
 
       <div class="event-overlay"></div>
-
-      <span class="event-index">
-        02
-      </span>
-
-      <div class="event-icon">
-        ✦
-      </div>
+      <span class="event-index"> </span>
 
       <div>
         <span class="event-label">
@@ -2235,17 +2172,8 @@
 
 
     <article class="event-card party reveal delay-2">
-
       <div class="event-overlay"></div>
-
-      <span class="event-index">
-        03
-      </span>
-
-      <div class="event-icon">
-        ✧
-      </div>
-
+      <span class="event-index"></span>
       <div>
         <span class="event-label">
           PARA CELEBRAR
