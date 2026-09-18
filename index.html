@@ -1,2674 +1,1143 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1D3547">
-  <meta name="description" content="Invitio.mx crea invitaciones digitales elegantes, modernas y personalizadas para bodas, baby showers, fiestas y celebraciones.">
-  <title>Invitio.mx — Invitaciones digitales para momentos especiales</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-
-  <style>
-    /* =========================================================
-       INVITIO.MX — LIQUID GLASS LANDING
-       Todo el CSS está dentro de este archivo.
-    ========================================================= */
-
-    :root {
-      --navy: #1D3547;
-      --sage: #8BA888;
-      --gold: #D3A85B;
-      --cream: #F0E8D5;
-      --white: #FFFDF8;
-      --text-soft: rgba(29, 53, 71, .68);
-
-      --glass-bg: rgba(255, 255, 255, .34);
-      --glass-border: rgba(255, 255, 255, .62);
-
-      --shadow:
-        0 25px 70px rgba(29, 53, 71, .12),
-        inset 0 1px 0 rgba(255, 255, 255, .7);
-
-      --radius-xl: 38px;
-      --radius-lg: 28px;
-      --radius-md: 20px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--navy);
-      font-family: "DM Sans", sans-serif;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      pointer-events: none;
-
-      background-image:
-        linear-gradient(
-          rgba(29, 53, 71, .025) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(29, 53, 71, .025) 1px,
-          transparent 1px
-        );
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* =========================================================
-       AMBIENT BLOBS
-    ========================================================= */
-
-    .ambient {
-      position: fixed;
-      z-index: -5;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(90px);
-      opacity: .42;
-      animation: ambientFloat 12s ease-in-out infinite alternate;
-    }
-
-    .ambient.one {
-      width: 280px;
-      height: 280px;
-      left: -140px;
-      top: 15%;
-      background: var(--sage);
-    }
-
-    .ambient.two {
-      width: 320px;
-      height: 320px;
-      right: -160px;
-      top: 42%;
-      background: var(--gold);
-      animation-delay: -4s;
-    }
-
-    .ambient.three {
-      width: 240px;
-      height: 240px;
-      left: 45%;
-      bottom: -120px;
-      background: #B7C7AD;
-      animation-delay: -7s;
-    }
-
-    @keyframes ambientFloat {
-      from {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-
-      to {
-        transform: translate3d(35px, -25px, 0) scale(1.12);
-      }
-    }
-
-    /* =========================================================
-       GLASS
-    ========================================================= */
-
-    .glass {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 255, 255, .55),
-          rgba(255, 255, 255, .18)
-        );
-
-      border: 1px solid var(--glass-border);
-
-      box-shadow: var(--shadow);
-
-      backdrop-filter:
-        blur(25px)
-        saturate(130%);
-
-      -webkit-backdrop-filter:
-        blur(25px)
-        saturate(130%);
-    }
-
-    /* =========================================================
-       NAVBAR
-    ========================================================= */
-
-    .navbar {
-      position: fixed;
-      z-index: 100;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      width: min(1160px, calc(100% - 32px));
-      height: 70px;
-
-      padding: 0 15px 0 22px;
-
-      border-radius: 22px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      transition: .35s ease;
-    }
-
-    .navbar.scrolled {
-      top: 10px;
-      box-shadow:
-        0 18px 55px rgba(29, 53, 71, .17),
-        inset 0 1px 0 rgba(255, 255, 255, .75);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -.05em;
-    }
-
-    .brand span:last-child span {
-      font-weight: 400;
-      opacity: .65;
-    }
-
-    .brand-mark {
-      width: 35px;
-      height: 35px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 11px;
-
-      color: var(--cream);
-      background: var(--navy);
-
-      font-family: "Playfair Display", serif;
-      font-size: 22px;
-      font-style: italic;
-
-      box-shadow: 0 8px 22px rgba(29, 53, 71, .2);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-
-      color: rgba(29, 53, 71, .7);
-
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      position: relative;
-      transition: .25s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -7px;
-
-      height: 1px;
-
-      background: var(--gold);
-
-      transform: scaleX(0);
-      transform-origin: right;
-
-      transition: transform .3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--navy);
-    }
-
-    .nav-links a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 13px 17px;
-
-      border-radius: 14px;
-
-      color: var(--cream);
-      background: var(--navy);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      box-shadow: 0 12px 30px rgba(29, 53, 71, .2);
-
-      transition: .3s ease;
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 35px rgba(29, 53, 71, .27);
-    }
-
-    .nav-cta span {
-      color: var(--gold);
-      font-size: 16px;
-    }
-
-    .menu-toggle {
-      display: none;
-
-      width: 42px;
-      height: 42px;
-
-      border: 0;
-      background: transparent;
-
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      display: block;
-
-      width: 21px;
-      height: 1px;
-
-      margin: 6px auto;
-
-      background: var(--navy);
-
-      transition: .3s ease;
-    }
-
-    /* =========================================================
-       COMMON
-    ========================================================= */
-
-    .section {
-      width: min(1180px, calc(100% - 48px));
-      margin: auto;
-      padding: 125px 0;
-    }
-
-    .section-kicker {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-
-      color: rgba(29, 53, 71, .58);
-
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .18em;
-    }
-
-    .section-heading h2 {
-      margin-top: 19px;
-
-      font-family: "Playfair Display", serif;
-      font-size: clamp(43px, 5vw, 68px);
-      font-weight: 500;
-      line-height: .98;
-      letter-spacing: -.055em;
-    }
-
-    .section-heading em,
-    h1 em,
-    h2 em {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .centered {
-      text-align: center;
-    }
-
-    .centered .section-kicker {
-      justify-content: center;
-    }
-
-    /* =========================================================
-       HERO
-    ========================================================= */
-
-    .hero {
-      min-height: 850px;
-
-      padding-top: 190px;
-
-      display: grid;
-      grid-template-columns: 1.02fr .98fr;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      color: rgba(29, 53, 71, .65);
-
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .15em;
-    }
-
-    .pulse {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: var(--sage);
-
-      box-shadow:
-        0 0 0 6px rgba(139, 168, 136, .15);
-
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      50% {
-        box-shadow:
-          0 0 0 11px rgba(139, 168, 136, 0);
-      }
-    }
-
-    .hero h1 {
-      margin: 25px 0 28px;
-
-      max-width: 780px;
-
-      font-family: "Playfair Display", serif;
-      font-size: clamp(52px, 6.4vw, 84px);
-      font-weight: 500;
-      line-height: .96;
-      letter-spacing: -.065em;
-    }
-
-    .hero-text {
-      max-width: 570px;
-
-      color: var(--text-soft);
-
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      margin-top: 34px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-
-      min-height: 50px;
-
-      padding: 0 20px;
-
-      border-radius: 15px;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      transition: .3s ease;
-    }
-
-    .button-primary {
-      color: var(--cream);
-      background: var(--navy);
-
-      box-shadow:
-        0 15px 35px rgba(29, 53, 71, .2);
-    }
-
-    .button-primary:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 20px 42px rgba(29, 53, 71, .28);
-    }
-
-    .button-primary span {
-      color: var(--gold);
-      font-size: 18px;
-    }
-
-    .button-ghost {
-      border: 1px solid rgba(29, 53, 71, .15);
-      background: rgba(255, 255, 255, .14);
-    }
-
-    .button-ghost:hover {
-      background: rgba(255, 255, 255, .4);
-    }
-
-    .hero-note {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      margin-top: 43px;
-    }
-
-    .avatars {
-      display: flex;
-    }
-
-    .avatars span {
-      width: 31px;
-      height: 31px;
-
-      display: grid;
-      place-items: center;
-
-      margin-left: -7px;
-
-      border: 2px solid var(--cream);
-      border-radius: 50%;
-
-      color: var(--navy);
-      background: var(--sage);
-
-      font-size: 11px;
-    }
-
-    .avatars span:first-child {
-      margin-left: 0;
-
-      color: var(--gold);
-      background: var(--navy);
-    }
-
-    .hero-note strong,
-    .hero-note small {
-      display: block;
-    }
-
-    .hero-note strong {
-      font-size: 11px;
-    }
-
-    .hero-note small {
-      margin-top: 3px;
-
-      color: rgba(29, 53, 71, .52);
-
-      font-size: 10px;
-    }
-
-    /* =========================================================
-       HERO INVITATION MOCKUP
-    ========================================================= */
-
-    .hero-visual {
-      position: relative;
-
-      height: 590px;
-
-      display: grid;
-      place-items: center;
-
-      perspective: 1000px;
-    }
-
-    .invitation-card {
-      position: relative;
-
-      width: min(390px, 80%);
-      height: 520px;
-
-      padding: 22px;
-
-      overflow: hidden;
-
-      border-radius: 34px;
-
-      transform: rotate(3deg);
-
-      color: var(--navy);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255, 253, 248, .84),
-          rgba(255, 255, 255, .25)
-        );
-
-      transition: transform .5s ease;
-    }
-
-    .hero-visual:hover .invitation-card {
-      transform:
-        rotate(0deg)
-        translateY(-8px);
-    }
-
-    .invitation-card::before {
-      content: "";
-
-      position: absolute;
-      inset: 12px;
-
-      border: 1px solid rgba(29, 53, 71, .13);
-      border-radius: 27px;
-
-      pointer-events: none;
-    }
-
-    .card-shine {
-      position: absolute;
-
-      width: 180px;
-      height: 500px;
-
-      top: -190px;
-      right: -90px;
-
-      background: rgba(255, 255, 255, .45);
-
-      transform: rotate(28deg);
-
-      filter: blur(25px);
-    }
-
-    .mini-top,
-    .mini-bottom {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      justify-content: space-between;
-
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .16em;
-
-      opacity: .52;
-    }
-
-    .invitation-content {
-      position: relative;
-      z-index: 2;
-
-      height: 440px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      text-align: center;
-    }
-
-    .tiny-label {
-      margin-bottom: 29px;
-
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .28em;
-    }
-
-    .invitation-content h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 64px;
-      font-weight: 500;
-      line-height: .78;
-      letter-spacing: -.065em;
-    }
-
-    .invitation-content h2 i {
-      display: block;
-
-      margin: 8px 0;
-
-      color: var(--gold);
-
-      font-size: 27px;
-      line-height: 1;
-    }
-
-    .date-line {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      margin: 31px 0 22px;
-
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .22em;
-    }
-
-    .date-line span {
-      width: 22px;
-      height: 1px;
-
-      background: var(--gold);
-    }
-
-    .invitation-content p {
-      font-family: "Playfair Display", serif;
-      font-size: 13px;
-      font-style: italic;
-      line-height: 1.6;
-
-      opacity: .63;
-    }
-
-    .invitation-content button {
-      margin-top: 29px;
-
-      padding: 10px 14px;
-
-      border: 1px solid rgba(29, 53, 71, .16);
-      border-radius: 10px;
-
-      color: var(--navy);
-      background: rgba(255, 255, 255, .25);
-
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .15em;
-    }
-
-    /* =========================================================
-       FLOATING CARDS
-    ========================================================= */
-
-    .floating-card {
-      position: absolute;
-
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      padding: 13px 16px;
-
-      border-radius: 18px;
-
-      transition: transform .4s ease;
-    }
-
-    .float-one {
-      top: 23%;
-      right: 1%;
-
-      transform: rotate(-4deg);
-    }
-
-    .float-two {
-      left: 1%;
-      bottom: 18%;
-
-      transform: rotate(4deg);
-    }
-
-    .hero-visual:hover .float-one {
-      transform: rotate(-2deg) translateY(-7px);
-    }
-
-    .hero-visual:hover .float-two {
-      transform: rotate(2deg) translateY(7px);
-    }
-
-    .float-icon {
-      width: 32px;
-      height: 32px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 11px;
-
-      color: var(--gold);
-      background: var(--navy);
-
-      font-size: 13px;
-    }
-
-    .float-icon.sage {
-      color: var(--navy);
-      background: var(--sage);
-    }
-
-    .floating-card strong,
-    .floating-card small {
-      display: block;
-    }
-
-    .floating-card strong {
-      font-size: 12px;
-    }
-
-    .floating-card small {
-      margin-top: 2px;
-
-      color: rgba(29, 53, 71, .52);
-
-      font-size: 9px;
-    }
-
-    /* =========================================================
-       MARQUEE
-    ========================================================= */
-
-    .marquee-wrap {
-      width: 104%;
-      margin-left: -2%;
-
-      padding: 19px 0;
-
-      overflow: hidden;
-
-      border-top: 1px solid rgba(29, 53, 71, .1);
-      border-bottom: 1px solid rgba(29, 53, 71, .1);
-
-      transform: rotate(-1deg);
-    }
-
-    .marquee {
-      display: flex;
-      align-items: center;
-      gap: 31px;
-
-      width: max-content;
-
-      white-space: nowrap;
-
-      animation: marquee 28s linear infinite;
-
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .2em;
-    }
-
-    .marquee i {
-      color: var(--gold);
-      font-style: normal;
-    }
-
-    @keyframes marquee {
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* =========================================================
-       INTRO
-    ========================================================= */
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 100px;
-
-      margin-top: 70px;
-    }
-
-    .intro-text .large {
-      margin-bottom: 23px;
-
-      color: var(--navy);
-
-      font-family: "Playfair Display", serif;
-      font-size: 24px;
-      line-height: 1.5;
-    }
-
-    .intro-text p:not(.large) {
-      color: var(--text-soft);
-
-      font-size: 13px;
-      line-height: 1.9;
-    }
-
-    .text-link {
-      display: inline-flex;
-      gap: 12px;
-
-      margin-top: 25px;
-      padding-bottom: 7px;
-
-      border-bottom: 1px solid var(--gold);
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .feature-stack {
-      display: grid;
-      gap: 13px;
-    }
-
-    .feature {
-      display: grid;
-      grid-template-columns: 55px 1fr 30px;
-      align-items: center;
-      gap: 15px;
-
-      padding: 22px;
-
-      border-radius: 20px;
-
-      transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 25px 55px rgba(29, 53, 71, .16);
-    }
-
-    .feature-number {
-      color: var(--gold);
-      font-family: "Playfair Display", serif;
-      font-size: 30px;
-    }
-
-    .feature h3 {
-      margin-bottom: 4px;
-
-      font-family: "Playfair Display", serif;
-      font-size: 19px;
-      font-weight: 500;
-    }
-
-    .feature p {
-      color: rgba(29, 53, 71, .55);
-
-      font-size: 10px;
-      line-height: 1.6;
-    }
-
-    .feature-arrow {
-      color: rgba(29, 53, 71, .45);
-      font-size: 18px;
-    }
-
-    /* =========================================================
-       EVENTS
-    ========================================================= */
-
-    .events {
-      padding-top: 80px;
-    }
-
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-
-      margin-top: 65px;
-    }
-
-    .event-card {
-      position: relative;
-
-      height: 430px;
-
-      padding: 26px;
-
-      overflow: hidden;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      isolation: isolate;
-
-      border-radius: 28px;
-
-      color: var(--white);
-
-      transition:
-        transform .45s ease,
-        box-shadow .45s ease;
-    }
-
-    .event-card.wedding {
-      background-image: url('pexels-wr-heustis-310270240-32195684.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    .event-card.baby {
-      background-image: url('pexels-jonathanborba-37385721.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    .event-card.party {
-      background-image: url('pexels-marina-abrosimova-3319804-10252631.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    .event-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 28px 65px rgba(29, 53, 71, .2);
-    }
-
-    .event-overlay {
-      position: absolute;
-      inset: 0;
-
-      z-index: -1;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0, 0, 0, .05),
-          rgba(0, 0, 0, .46)
-        );
-    }
-
-    .event-index {
-      font-size: 9px;
-      letter-spacing: .16em;
-      opacity: .72;
-    }
-
-    .event-icon {
-      position: absolute;
-
-      top: 45%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
-
-      color: #F3DFAC;
-
-      font-family: "Playfair Display", serif;
-      font-size: 45px;
-    }
-
-    .event-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .2em;
-      opacity: .7;
-    }
-
-    .event-card h3 {
-      margin: 7px 0;
-
-      font-family: "Playfair Display", serif;
-      font-size: 39px;
-      font-weight: 500;
-      line-height: .95;
-    }
-
-    .event-card p {
-      font-size: 10px;
-      opacity: .73;
-    }
-
-    /* =========================================================
-       PROCESS
-    ========================================================= */
-
-    .process-card {
-      display: grid;
-      grid-template-columns: .65fr 1.35fr;
-      gap: 80px;
-
-      padding: 70px;
-
-      border-radius: var(--radius-xl);
-    }
-
-    .process-heading h2 {
-      margin: 18px 0;
-
-      font-family: "Playfair Display", serif;
-      font-size: 55px;
-      font-weight: 500;
-      line-height: .96;
-      letter-spacing: -.05em;
-    }
-
-    .process-heading p {
-      max-width: 300px;
-
-      color: rgba(29, 53, 71, .57);
-
-      font-size: 11px;
-      line-height: 1.8;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .step {
-      min-height: 210px;
-
-      padding-left: 20px;
-
-      border-left: 1px solid rgba(29, 53, 71, .14);
-    }
-
-    .step > span {
-      color: var(--gold);
-
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .step h3 {
-      margin: 45px 0 10px;
-
-      font-family: "Playfair Display", serif;
-      font-size: 25px;
-      font-weight: 500;
-    }
-
-    .step p {
-      color: rgba(29, 53, 71, .57);
-
-      font-size: 10px;
-      line-height: 1.75;
-    }
-
-    /* =========================================================
-       PLANS
-    ========================================================= */
-
-    .plans {
-      padding-bottom: 90px;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-
-      margin-top: 60px;
-    }
-
-    .plan {
-      position: relative;
-
-      min-height: 455px;
-
-      padding: 35px;
-
-      overflow: hidden;
-
-      border-radius: 27px;
-
-      transition:
-        transform .4s ease,
-        box-shadow .4s ease;
-    }
-
-    .plan:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 30px 70px rgba(29, 53, 71, .17);
-    }
-
-    .plan-top {
-      display: flex;
-      justify-content: space-between;
-
-      color: rgba(29, 53, 71, .52);
-
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .15em;
-    }
-
-    .plan h3 {
-      margin: 60px 0 12px;
-
-      font-family: "Playfair Display", serif;
-      font-size: 46px;
-      font-weight: 500;
-    }
-
-    .plan-description {
-      max-width: 420px;
-
-      color: rgba(29, 53, 71, .61);
-
-      font-size: 11px;
-      line-height: 1.75;
-    }
-
-    .plan ul {
-      display: grid;
-      gap: 9px;
-
-      margin-top: 28px;
-
-      list-style: none;
-
-      font-size: 10px;
-    }
-
-    .plan li::before {
-      content: "✓";
-
-      margin-right: 10px;
-
-      color: var(--sage);
-
-      font-weight: 700;
-    }
-
-    .plan-link {
-      position: absolute;
-      left: 35px;
-      bottom: 32px;
-
-      padding-bottom: 7px;
-
-      border-bottom: 1px solid var(--gold);
-
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .plan-link span {
-      margin-left: 15px;
-      color: var(--gold);
-      font-size: 15px;
-    }
-
-    .plan-featured {
-      color: var(--cream);
-
-      background:
-        radial-gradient(
-          circle at 80% 10%,
-          rgba(139, 168, 136, .3),
-          transparent 32%
-        ),
-        linear-gradient(
-          140deg,
-          rgba(29, 53, 71, .96),
-          rgba(29, 53, 71, .78)
-        );
-
-      border-color: rgba(255, 255, 255, .2);
-    }
-
-    .plan-featured .plan-top,
-    .plan-featured .plan-description {
-      color: var(--cream);
-      opacity: .65;
-    }
-
-    .plan-featured li::before {
-      color: var(--gold);
-    }
-
-    .featured-tag {
-      position: absolute;
-
-      top: 20px;
-      right: 20px;
-
-      padding: 7px 11px;
-
-      border-radius: 100px;
-
-      color: var(--navy);
-      background: var(--gold);
-
-      font-size: 7px;
-      font-weight: 800;
-      letter-spacing: .15em;
-    }
-
-    /* =========================================================
-       QUOTE
-    ========================================================= */
-
-    .quote-section {
-      padding-top: 20px;
-      padding-bottom: 125px;
-    }
-
-    .quote {
-      position: relative;
-
-      padding: 90px 30px;
-
-      overflow: hidden;
-
-      text-align: center;
-
-      border-radius: 35px;
-    }
-
-    .quote::before {
-      content: "";
-
-      position: absolute;
-
-      width: 270px;
-      height: 270px;
-
-      left: 10%;
-      top: -130px;
-
-      border-radius: 50%;
-
-      background: var(--sage);
-
-      opacity: .12;
-
-      filter: blur(30px);
-    }
-
-    .quote::after {
-      content: "";
-
-      position: absolute;
-
-      width: 230px;
-      height: 230px;
-
-      right: 7%;
-      bottom: -150px;
-
-      border-radius: 50%;
-
-      background: var(--gold);
-
-      opacity: .1;
-
-      filter: blur(25px);
-    }
-
-    .quote-mark {
-      color: var(--gold);
-
-      font-family: "Playfair Display", serif;
-      font-size: 62px;
-
-      line-height: .5;
-    }
-
-    blockquote {
-      max-width: 760px;
-
-      margin: 25px auto;
-
-      font-family: "Playfair Display", serif;
-      font-size: clamp(36px, 4vw, 58px);
-      font-weight: 500;
-      line-height: 1.07;
-      letter-spacing: -.05em;
-    }
-
-    .quote-brand {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .22em;
-      opacity: .5;
-    }
-
-    /* =========================================================
-       CONTACT
-    ========================================================= */
-
-    .contact {
-      padding-top: 0;
-    }
-
-    .contact-card {
-      position: relative;
-
-      display: grid;
-      grid-template-columns: 1fr .75fr;
-      gap: 50px;
-
-      padding: 65px;
-
-      overflow: hidden;
-
-      border-radius: 35px;
-
-      color: var(--cream);
-      background: var(--navy);
-    }
-
-    .contact-card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 480px;
-      height: 480px;
-
-      right: -170px;
-      top: -270px;
-
-      border: 1px solid rgba(211, 168, 91, .3);
-      border-radius: 50%;
-    }
-
-    .contact-card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 300px;
-      height: 300px;
-
-      right: 20%;
-      bottom: -250px;
-
-      border: 1px solid rgba(139, 168, 136, .2);
-      border-radius: 50%;
-    }
-
-    .contact-card h2 {
-      margin: 20px 0;
-
-      font-family: "Playfair Display", serif;
-      font-size: 70px;
-      font-weight: 500;
-      line-height: .91;
-      letter-spacing: -.06em;
-    }
-
-    .contact-card p {
-      max-width: 440px;
-
-      color: rgba(240, 232, 213, .63);
-
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .contact-actions {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 18px;
-    }
-
-    .button-light {
-      color: var(--navy);
-      background: var(--cream);
-    }
-
-    .button-light:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, .18);
-    }
-
-    .social-link {
-      padding-bottom: 5px;
-
-      border-bottom: 1px solid rgba(211, 168, 91, .45);
-
-      color: var(--gold);
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .contact-actions small {
-      color: rgba(240, 232, 213, .42);
-      font-size: 9px;
-    }
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-
-    footer {
-      width: min(1180px, calc(100% - 48px));
-
-      margin: auto;
-      padding: 35px 0 45px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      border-top: 1px solid rgba(29, 53, 71, .12);
-
-      color: rgba(29, 53, 71, .65);
-
-      font-size: 10px;
-    }
-
-    .footer-brand {
-      font-size: 17px;
-    }
-
-    .footer-brand .brand-mark {
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-    }
-
-    /* =========================================================
-       SCROLL REVEAL
-    ========================================================= */
-
-    .reveal {
-      opacity: 0;
-
-      transform: translateY(28px);
-
-      transition:
-        opacity .8s ease,
-        transform .8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .delay-1 {
-      transition-delay: .12s;
-    }
-
-    .delay-2 {
-      transition-delay: .22s;
-    }
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
-
-    @media (max-width: 900px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-cta {
-        margin-left: auto;
-        margin-right: 7px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links.mobile-open {
-        position: absolute;
-
-        top: 78px;
-        left: 0;
-        right: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-
-        padding: 10px;
-
-        border-radius: 20px;
-
-        background: rgba(240, 232, 213, .82);
-
-        border: 1px solid rgba(255, 255, 255, .6);
-
-        box-shadow: var(--shadow);
-
-        backdrop-filter: blur(25px);
-      }
-
-      .nav-links.mobile-open a {
-        padding: 14px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 145px;
-
-        gap: 25px;
-      }
-
-      .hero-copy {
-        max-width: 720px;
-      }
-
-      .hero-visual {
-        height: 570px;
-      }
-
-      .intro-grid,
-      .process-card,
-      .contact-card {
-        grid-template-columns: 1fr;
-      }
-
-      .intro-grid {
-        gap: 55px;
-      }
-
-      .process-card {
-        gap: 55px;
-      }
-
-      .event-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .event-card:last-child {
-        grid-column: span 2;
-      }
-
-      .contact-card {
-        gap: 45px;
-      }
-    }
-
-    @media (max-width: 620px) {
-
-      .section {
-        width: calc(100% - 30px);
-        padding: 90px 0;
-      }
-
-      .navbar {
-        top: 10px;
-
-        width: calc(100% - 20px);
-        height: 62px;
-
-        padding-left: 15px;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 115px;
-      }
-
-      .hero h1 {
-        font-size: 49px;
-      }
-
-      .hero-text {
-        font-size: 14px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .hero-visual {
-        height: 510px;
-      }
-
-      .invitation-card {
-        width: 78%;
-        height: 445px;
-      }
-
-      .invitation-content {
-        height: 370px;
-      }
-
-      .invitation-content h2 {
-        font-size: 49px;
-      }
-
-      .float-one {
-        right: -2%;
-        top: 19%;
-      }
-
-      .float-two {
-        left: -3%;
-        bottom: 12%;
-      }
-
-      .section-heading h2 {
-        font-size: 43px;
-      }
-
-      .intro-text .large {
-        font-size: 21px;
-      }
-
-      .event-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .event-card,
-      .event-card:last-child {
-        grid-column: auto;
-        height: 390px;
-      }
-
-      .process-card {
-        padding: 38px 25px;
-      }
-
-      .process-heading h2 {
-        font-size: 45px;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .step {
-        min-height: auto;
-        padding-bottom: 20px;
-      }
-
-      .step h3 {
-        margin: 15px 0 8px;
-      }
-
-      .plans-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .plan {
-        min-height: 470px;
-        padding: 29px;
-      }
-
-      .plan h3 {
-        font-size: 41px;
-      }
-
-      .plan-link {
-        left: 29px;
-      }
-
-      .quote {
-        padding: 70px 20px;
-      }
-
-      blockquote {
-        font-size: 36px;
-      }
-
-      .contact-card {
-        padding: 40px 25px;
-      }
-
-      .contact-card h2 {
-        font-size: 56px;
-      }
-
-      .contact-actions {
-        margin-top: 5px;
-      }
-
-      footer {
-        width: calc(100% - 30px);
-
-        flex-wrap: wrap;
-      }
-
-      footer p {
-        order: 3;
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>invitio.mx — Invitaciones digitales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f3efe6;
+    --cream-2:#ece5d6;
+    --sky-1:#cfe0ea;
+    --sky-2:#e9eff2;
+    --navy:#122a3a;
+    --navy-2:#1b3a4d;
+    --sage:#8a9a7e;
+    --sage-dark:#6f8264;
+    --ink:#1c2b30;
+    --ink-soft:#5a6b6a;
+    --white:#ffffff;
+    --gold:#e7b65b;
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:12px;
+    --shadow:0 20px 50px -20px rgba(18,42,58,0.25);
+    --shadow-soft:0 10px 30px -12px rgba(18,42,58,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    color:var(--navy);
+  }
+
+  .wrap{max-width:1240px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ================= HEADER ================= */
+  header{
+    position:sticky; top:0; z-index:100;
+    padding:15px 0 15px 0;
+  }
+  .nav-inner{
+    max-width:1240px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; flex-wrap:nowrap;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-size:19px; font-weight:500; color:var(--navy);
+  }
+  .logo .mark{
+    width:30px; height:30px; border-radius:8px;
+    background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--cream); font-style:italic; font-size:15px; font-family:'Fraunces',serif;
+  }
+  .nav-pill{
+    display:flex; gap:6px;
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(10px);
+    padding:6px; border-radius:999px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+  }
+  .nav-pill a{
+    padding:10px 18px; border-radius:999px; font-size:14px; font-weight:500;
+    color:var(--navy); transition:background .25s ease, color .25s ease;
+  }
+  .nav-pill a.active{background:var(--white); box-shadow:var(--shadow-soft);}
+  .nav-pill a:hover{background:rgba(255,255,255,0.8);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:999px; font-size:14px; font-weight:600;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn svg{transition:transform .25s ease;}
+  .btn:hover svg{transform:translateX(3px);}
+  .btn-dark{background:var(--navy); color:var(--cream);}
+  .btn-dark:hover{background:var(--navy-2); box-shadow:var(--shadow-soft); transform:translateY(-2px);}
+  .btn-outline{background:transparent; color:var(--navy); box-shadow:inset 0 0 0 1.5px rgba(18,42,58,0.35);}
+  .btn-outline:hover{box-shadow:inset 0 0 0 1.5px rgba(18,42,58,0.6); transform:translateY(-2px);}
+  .btn-light{background:var(--white); color:var(--navy);}
+  .btn-light:hover{transform:translateY(-2px); box-shadow:var(--shadow-soft);}
+  .nav-cta{flex-shrink:0;}
+  .nav-cta .short{display:none;}
+
+  .menu-toggle{display:none; width:42px; height:42px; border-radius:50%; background:var(--white); align-items:center; justify-content:center; box-shadow:var(--shadow-soft);}
+  .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after{
+    content:''; display:block; width:16px; height:1.5px; background:var(--navy); position:relative; transition:all .25s ease;
+  }
+  .menu-toggle span::before{position:absolute; top:-5px;}
+  .menu-toggle span::after{position:absolute; top:5px;}
+  .menu-toggle.is-active span{background:transparent;}
+  .menu-toggle.is-active span::before{top:0; transform:rotate(45deg);}
+  .menu-toggle.is-active span::after{top:0; transform:rotate(-45deg);}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    padding:64px 0 100px;
+    background:linear-gradient(180deg, #d7e5ee 0%, #e7edea 55%, var(--cream) 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 800px 400px at 15% 10%, rgba(255,255,255,0.5), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 90% 30%, rgba(255,255,255,0.35), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1fr 1.05fr; gap:40px; align-items:center;
+    padding-top:56px;
+  }
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:18px; display:block;
+  }
+  .hero h1{
+    font-size:58px;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:400; color:var(--sage-dark);
+  }
+  .hero p.lead{
+    font-size:16px; line-height:1.7; color:var(--ink-soft); max-width:420px; margin-bottom:32px;
+  }
+  .hero-ctas{display:flex; align-items:center; gap:14px; margin-bottom:44px;}
+
+  .social-proof{display:flex; align-items:center; gap:16px;}
+  .avatars{display:flex;}
+  .avatars .av{
+    width:38px; height:38px; border-radius:50%; margin-left:-10px; border:3px solid var(--cream);
+    background:linear-gradient(135deg,var(--sage),var(--navy-2));
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:600;
+  }
+  .avatars .av:first-child{margin-left:0;}
+  .avatars .plus{background:var(--navy); color:var(--cream); font-size:15px;}
+  .social-proof .txt{font-size:13.5px; color:var(--ink-soft); line-height:1.4; max-width:170px;}
+
+  /* hero visual */
+  .hero-visual{position:relative; height:560px;}
+  .social-rail{
+    position:absolute; left:-56px; top:38%; display:flex; flex-direction:column; gap:22px; z-index:5;
+  }
+  .social-rail a{
+    width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.6);
+    display:flex; align-items:center; justify-content:center; color:var(--navy); font-size:14px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .social-rail a:hover{background:#fff; transform:translateY(-2px);}
+
+  .floral{
+    position:absolute; right:-70px; bottom:-40px; width:420px; height:420px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, #fbf7f0 0 8%, transparent 9%),
+      radial-gradient(circle at 55% 20%, #fbf7f0 0 7%, transparent 8%),
+      radial-gradient(circle at 70% 45%, #fbf7f0 0 9%, transparent 10%),
+      radial-gradient(circle at 40% 55%, #fbf7f0 0 8%, transparent 9%),
+      radial-gradient(circle at 65% 70%, #fbf7f0 0 7%, transparent 8%),
+      radial-gradient(circle at 25% 68%, #fbf7f0 0 6%, transparent 7%),
+      conic-gradient(from 90deg at 50% 50%, #eef0e4, #e3ead9 30%, #d9e3cb 60%, #eef0e4);
+    opacity:.9; filter:blur(0.3px);
+    z-index:1;
+  }
+
+  .badge-float{
+    position:absolute; z-index:6;
+    background:rgba(255,255,255,0.75); backdrop-filter:blur(8px);
+    border-radius:16px; padding:10px 16px;
+    display:flex; align-items:center; gap:10px;
+    font-size:12.5px; font-weight:600; color:var(--navy);
+    box-shadow:var(--shadow-soft);
+    animation:float 5s ease-in-out infinite;
+  }
+  .badge-float .ic{
+    width:30px; height:30px; border-radius:9px; background:var(--white);
+    display:flex; align-items:center; justify-content:center; font-size:14px;
+  }
+  .badge-responsive{top:18px; right:30px; animation-delay:.2s;}
+  .badge-custom{left:0; bottom:120px; animation-delay:1s;}
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+
+  .phone{
+    position:absolute; border-radius:26px; overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(18,42,58,0.45);
+    background:#fff;
+  }
+  .phone-save{
+    width:280px; height:410px; left:70px; top:70px; z-index:3;
+    background:linear-gradient(160deg,#fbf8f1,#f1ebdb);
+    padding:34px 26px; text-align:center;
+    animation:bob 7s ease-in-out infinite;
+  }
+  .phone-save .tag{font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:26px;}
+  .phone-save .sub{font-family:'Fraunces',serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:8px;}
+  .phone-save .names{font-family:'Fraunces',serif; font-size:38px; color:var(--navy); line-height:1.1; margin-bottom:26px;}
+  .phone-save .date{font-size:12px; letter-spacing:.1em; color:var(--ink-soft); margin-top:auto;}
+  .phone-save .leaf-row{margin-top:30px; height:60px; background:
+     radial-gradient(circle at 20% 50%, #b9c7a4 0 10px, transparent 11px),
+     radial-gradient(circle at 40% 40%, #a8bb91 0 8px, transparent 9px),
+     radial-gradient(circle at 60% 55%, #c3cfae 0 9px, transparent 10px),
+     radial-gradient(circle at 80% 45%, #aebd97 0 7px, transparent 8px);
+     opacity:.8;
+  }
+
+  .phone-photo{
+    width:210px; height:330px; right:0; top:150px; z-index:4;
+    background:linear-gradient(160deg,#3a5568,#16232c 70%);
+    padding:20px 18px; display:flex; flex-direction:column; justify-content:flex-end;
+    animation:bob 7s ease-in-out infinite; animation-delay:.6s;
+  }
+  .phone-photo::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 140px 90px at 50% 30%, rgba(255,196,120,0.5), transparent 70%),
+      linear-gradient(200deg, #cfa876 0%, #7c8fa0 45%, #1b2732 100%);
+    opacity:.85;
+  }
+  .phone-photo .content{position:relative; z-index:2; color:#fff;}
+  .phone-photo .content p.small{font-size:11px; opacity:.85; margin-bottom:4px;}
+  .phone-photo .content p.date{font-size:12px; font-weight:600;}
+  .phone-photo .arrowdot{
+    position:absolute; bottom:14px; right:14px; width:30px; height:30px; border-radius:50%;
+    background:rgba(255,255,255,0.9); display:flex; align-items:center; justify-content:center; z-index:3;
+  }
+
+  @keyframes bob{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-14px) rotate(-0.4deg);}
+  }
+
+  /* ================= SECTION GENERIC ================= */
+  section{padding:110px 0;}
+  .section-head{max-width:520px;}
+  .section-head h2{font-size:38px; margin:14px 0 18px;}
+  .section-head p{font-size:15.5px; line-height:1.75; color:var(--ink-soft); margin-bottom:26px;}
+  .link-arrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600;
+    padding:12px 20px; border-radius:999px; background:var(--white); box-shadow:var(--shadow-soft);
+    transition:transform .25s ease;
+  }
+  .link-arrow:hover{transform:translateX(4px);}
+  .link-arrow svg{transition:transform .25s ease;}
+  .link-arrow:hover svg{transform:translateX(3px);}
+
+  /* ---- 01 lo que hacemos ---- */
+  .sec-01 .grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:40px; align-items:center;}
+  .stack-cards{position:relative; height:420px;}
+  .stack-photo{
+    position:absolute; width:78%; height:88%; border-radius:var(--radius-lg);
+    top:6%; left:0;
+    background:linear-gradient(155deg,#5a6f52,#2f3f2a);
+  }
+  .card-feature{
+    position:absolute; width:220px; border-radius:var(--radius-md);
+    background:rgba(255,255,255,0.55); backdrop-filter:blur(14px);
+    box-shadow:var(--shadow-soft); padding:22px;
+    transition:transform .35s ease;
+  }
+  .card-feature:hover{transform:translateY(-8px);}
+  .card-feature .icon{
+    width:42px; height:42px; border-radius:12px; background:var(--white);
+    display:flex; align-items:center; justify-content:center; margin-bottom:34px; font-size:18px;
+  }
+  .card-feature h3{font-size:16px; font-weight:600; font-family:'Inter',sans-serif; color:var(--navy); margin-bottom:8px;}
+  .card-feature p{font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+  .card-1{left:18%; top:0; z-index:3;}
+  .card-2{left:49%; top:48%; z-index:4; background:rgba(255,255,255,0.72);}
+  .card-3{left:57%; top:-7%; z-index:2; background:rgba(255,255,255,0.4);}
+
+  /* ---- 02 para cada ocasion ---- */
+  .occasion-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:56px;}
+  .occ-card{
+    position:relative; border-radius:var(--radius-md); overflow:hidden; height:320px;
+    background:var(--white); box-shadow:var(--shadow-soft);
+    transition:transform .4s ease, box-shadow .4s ease;
+    display:block;
+  }
+  .occ-card:hover{transform:translateY(-8px); box-shadow:var(--shadow);}
+  .occ-photo{height:210px; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:6px; color:#fff;}
+  .occ-1 .occ-photo{background:linear-gradient(160deg,#e9e2d0,#a9895e); color:#3a2c17;}
+  .occ-2 .occ-photo{background:linear-gradient(160deg,#f3ddd6,#d99f92); color:#4a2c22;}
+  .occ-3 .occ-photo{background:linear-gradient(160deg,#8fc4c9,#e7b65b); color:#1c2b30;}
+  .occ-4 .occ-photo{background:linear-gradient(160deg,#3a4652,#101820);}
+  .occ-preview-tag{font-size:10px; letter-spacing:.16em; text-transform:uppercase; opacity:.8;}
+  .occ-preview-names{font-family:'Fraunces',serif; font-style:italic; font-size:18px; line-height:1.25;}
+  .occ-badge{
+    position:absolute; top:16px; left:16px; width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.85); display:flex; align-items:center; justify-content:center; font-size:15px;
+    color:var(--navy);
+  }
+  .occ-body{padding:18px 20px;}
+  .occ-body .row{display:flex; align-items:center; justify-content:space-between;}
+  .occ-body h3{font-size:16px; font-family:'Inter',sans-serif; font-weight:600; color:var(--navy);}
+  .occ-body p{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+  .occ-link{display:block; font-size:11.5px; font-weight:600; color:var(--sage-dark); margin-top:10px;}
+  .occ-arrow{
+    width:30px; height:30px; border-radius:50%; background:var(--cream-2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:background .25s ease, transform .25s ease;
+    color:var(--navy);
+  }
+  .occ-card:hover .occ-arrow{background:var(--navy); color:#fff; transform:rotate(45deg);}
+
+  /* ---- 03 como contratamos y entregamos (timeline) ---- */
+  .timeline{position:relative; margin-bottom:56px;}
+  .timeline-line{
+    position:absolute; top:34px; left:16.5%; right:16.5%; height:2px;
+    background:linear-gradient(90deg, var(--navy), var(--sage), var(--gold));
+    opacity:.5; z-index:0;
+  }
+  .timeline-grid{
+    position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:40px;
+  }
+  .tstep{text-align:center; display:flex; flex-direction:column; align-items:center;}
+  .tstep-circle{
+    width:68px; height:68px; border-radius:20px; margin-bottom:18px;
+    background:var(--navy); color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:22px; font-weight:600;
+    box-shadow:var(--shadow-soft); border:5px solid var(--cream);
+    transition:transform .3s ease;
+  }
+  .tstep:hover .tstep-circle{transform:scale(1.06);}
+  .tstep:nth-child(2) .tstep-circle{background:var(--sage); color:var(--navy);}
+  .tstep:nth-child(3) .tstep-circle{background:var(--gold); color:var(--navy);}
+  .tstep-kicker{
+    display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:10px;
+  }
+  .tstep h3{font-size:19px; margin-bottom:10px; max-width:260px;}
+  .tstep p{font-size:13px; color:var(--ink-soft); line-height:1.6; max-width:260px; margin-bottom:16px;}
+  .tstep-pill{
+    display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500;
+    color:var(--ink-soft); background:rgba(255,255,255,0.6); padding:7px 14px; border-radius:999px;
+    box-shadow:var(--shadow-soft);
+  }
+
+  .trust-bar{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+    background:rgba(139,168,136,0.14); border-radius:var(--radius-md); padding:26px 30px;
+  }
+  .trust-copy{display:flex; align-items:center; gap:16px;}
+  .trust-icon{
+    width:40px; height:40px; border-radius:12px; background:var(--navy); color:#fff; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  .trust-title{font-size:14px; font-weight:600; color:var(--navy); margin-bottom:3px;}
+  .trust-sub{font-size:12px; color:var(--ink-soft);}
+
+  /* ---- 04 elige tu estilo ---- */
+  .sec-04{background:var(--cream);}
+  .sec-04 .grid{display:grid; grid-template-columns:.75fr 1.25fr; gap:50px; align-items:center;}
+  .phone-mock{
+    position:relative; width:250px; margin:0 auto;
+  }
+  .phone-mock .frame{
+    width:250px; height:500px; border-radius:38px; background:#0e1a22; padding:12px;
+    box-shadow:var(--shadow);
+  }
+  .phone-mock .screen{
+    width:100%; height:100%; border-radius:28px; overflow:hidden;
+    background:linear-gradient(160deg,#fbf1e4,#f4e1c8);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    padding:20px;
+  }
+  .phone-mock .screen h4{font-family:'Fraunces',serif; font-style:italic; font-size:26px; color:var(--navy); margin-bottom:6px;}
+  .phone-mock .screen .bear{
+    width:80px; height:80px; border-radius:50%; margin:18px auto;
+    background:radial-gradient(circle at 40% 35%, #d8ab7c, #a97a4c);
+  }
+  .phone-mock .screen .date{font-size:11px; letter-spacing:.1em; color:var(--ink-soft); margin-top:10px;}
+  .phone-mock .disc{
+    position:absolute; width:170px; height:170px; border-radius:50%;
+    border:1.5px solid rgba(18,42,58,0.15);
+    top:-30px; left:-60px; z-index:-1;
+  }
+
+  .pricing{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .price-card{
+    border-radius:var(--radius-lg); padding:34px 30px; position:relative;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .price-card:hover{transform:translateY(-6px); box-shadow:var(--shadow);}
+  .price-card.light{background:rgba(255,255,255,0.6); box-shadow:var(--shadow-soft);}
+  .price-card.dark{background:linear-gradient(165deg,var(--navy),#0d1f2a); color:#eef2ee;}
+  .price-tag{font-size:11px; letter-spacing:.12em; text-transform:uppercase; opacity:.65; margin-bottom:14px;}
+  .price-card h3{font-size:26px; margin-bottom:12px;}
+  .price-card.dark h3{color:#fff;}
+  .price-card p.desc{font-size:13px; line-height:1.6; color:var(--ink-soft); margin-bottom:22px;}
+  .price-card.dark p.desc{color:#c6d0ce;}
+  .price{font-family:'Fraunces',serif; font-size:30px; color:var(--navy); margin-bottom:22px;}
+  .price-card.dark .price{color:#fff;}
+  .price span{font-size:13px; font-family:'Inter',sans-serif; font-weight:500; color:var(--ink-soft);}
+  .price-card.dark .price span{color:#a9b8b5;}
+  .price-list{margin-bottom:26px;}
+  .price-list li{
+    font-size:13px; display:flex; align-items:center; gap:9px; margin-bottom:10px; color:var(--ink);
+  }
+  .price-card.dark .price-list li{color:#dce4e1;}
+  .price-list li .check{
+    width:16px; height:16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:9px; flex-shrink:0;
+  }
+  .price-card.dark .price-list li .check{background:#7fa393;}
+  .popular-badge{
+    position:absolute; top:-14px; right:26px; background:var(--gold); color:#3a2c05;
+    font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:7px 14px; border-radius:999px; box-shadow:var(--shadow-soft);
+  }
+
+
+  /* ---- 05 cuanto ahorras (calculadora) ---- */
+  .sec-06{padding-top:0;}
+  .calc-card{
+    background:rgba(255,255,255,0.6); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-soft); padding:48px 44px; max-width:760px; margin:5rem auto;
+  }
+  .calc-row{margin-bottom:30px;}
+  .calc-label{display:flex; align-items:center; justify-content:space-between; font-size:13.5px; font-weight:600; color:var(--navy); margin-bottom:12px;}
+  .calc-value{font-family:'Fraunces',serif; font-size:18px; color:var(--sage-dark);}
+  input[type="range"]{
+    width:100%; -webkit-appearance:none; appearance:none; height:6px; border-radius:999px;
+    background:var(--cream-2); outline:none;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:50%;
+    background:var(--navy); cursor:pointer; box-shadow:0 4px 10px rgba(18,42,58,0.3); border:3px solid #fff;
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:20px; height:20px; border-radius:50%; background:var(--navy); cursor:pointer; border:3px solid #fff;
+  }
+  .calc-scale{display:flex; justify-content:space-between; font-size:11px; color:var(--ink-soft); margin-top:8px; font-family:'Inter',sans-serif;}
+  .calc-compare{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;}
+  .calc-box{background:var(--cream-2); border-radius:var(--radius-sm); padding:18px 20px;}
+  .calc-box-accent{background:rgba(139,168,136,0.18);}
+  .calc-box-label{display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .calc-box-amount{font-family:'Fraunces',serif; font-size:22px; color:var(--navy);}
+  .calc-savings{
+    text-align:center; background:linear-gradient(160deg,var(--navy),#0d1f2a); color:#fff;
+    border-radius:var(--radius-md); padding:30px;
+  }
+  .calc-savings-label{display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--sage); margin-bottom:8px;}
+  .calc-savings-amount{font-family:'Fraunces',serif; font-size:40px; display:block; margin-bottom:8px;}
+  .calc-savings p{font-size:12.5px; color:#c6d0ce; max-width:320px; margin:0 auto;}
+
+  /* ---- 06 preguntas frecuentes ---- */
+  .faq-list{display:flex; flex-direction:column; gap:12px;}
+  .faq-item{
+    background:rgba(255,255,255,0.6); border-radius:var(--radius-sm); overflow:hidden;
+    box-shadow:var(--shadow-soft);
+  }
+  .faq-q{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:20px 24px; text-align:left; background:transparent; font-size:14.5px; font-weight:600; color:var(--navy);
+  }
+  .faq-icon{
+    width:26px; height:26px; border-radius:50%; background:var(--cream-2); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:400;
+    transition:transform .3s ease, background .3s ease;
+  }
+  .faq-q[aria-expanded="true"] .faq-icon{background:var(--navy); color:#fff; transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease;
+    padding:0 24px;
+  }
+  .faq-a p{font-size:13px; line-height:1.7; color:var(--ink-soft); padding-bottom:0;}
+  .faq-q[aria-expanded="true"] + .faq-a{max-height:200px; padding:0 24px 22px;}
+  .faq-cta{text-align:center; margin-top:36px;}
+  .faq-cta p{font-size:13.5px; color:var(--ink-soft); margin-bottom:14px;}
+  .whatsapp-cta{background:#1f8a54;}
+  .whatsapp-cta:hover{background:#186b41;}
+
+  /* ---- CTA banner ---- */
+  .cta-banner{padding:0 0 110px;}
+  .cta-inner{
+    position:relative; border-radius:var(--radius-lg); overflow:hidden;
+    min-height:220px; display:flex; align-items:center; justify-content:space-between; gap:24px;
+    padding:0 56px; flex-wrap:wrap;
+    background:linear-gradient(120deg,#cbb89a 0%, #ded2b8 40%, #efe9db 100%);
+  }
+  .cta-inner::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 12% 50%, rgba(212,175,120,0.55), transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(255,255,255,0.4), transparent 50%);
+  }
+  .cta-text{position:relative; z-index:2; padding:44px 0;}
+  .cta-text h2{font-size:30px; max-width:420px; margin-bottom:6px;}
+  .cta-text .mini{font-size:11px; letter-spacing:.16em; color:var(--ink-soft); text-transform:uppercase;}
+  .cta-inner .btn{position:relative; z-index:2;}
+
+  /* ---- footer ---- */
+  footer{padding:0 0 50px;}
+  .footer-top{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+    padding-bottom:26px; border-bottom:1px solid rgba(18,42,58,0.1);
+  }
+  .footer-top p{font-size:13px; color:var(--ink-soft);}
+  .footer-icons{display:flex; gap:14px; align-items:center;}
+  .footer-icons a{
+    width:34px; height:34px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-soft); font-size:13px; transition:transform .2s ease;
+  }
+  .footer-icons a:hover{transform:translateY(-3px);}
+  .footer-bottom{
+    display:flex; align-items:center; justify-content:space-between; padding-top:22px; flex-wrap:wrap; gap:10px;
+  }
+  .footer-bottom p{font-size:12px; color:var(--ink-soft);}
+  .to-top{
+    width:40px; height:40px; border-radius:50%; background:var(--white); box-shadow:var(--shadow-soft);
+    display:flex; align-items:center; justify-content:center; transition:transform .25s ease;
+  }
+  .to-top:hover{transform:translateY(-4px);}
+
+  /* ---- floating whatsapp button ---- */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:80;
+    width:58px; height:58px; border-radius:50%; background:#1f8a54; color:#fff;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -8px rgba(20,60,40,0.45);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .wa-float:hover{transform:translateY(-3px) scale(1.04); box-shadow:0 18px 36px -8px rgba(20,60,40,0.55);}
+  .wa-float svg{width:26px; height:26px;}
+
+  /* ============ responsive ============ */
+  @media (max-width:1080px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:460px; margin-top:20px;}
+    .sec-01 .grid, .sec-04 .grid{grid-template-columns:1fr; gap:56px;}
+    .occasion-grid{grid-template-columns:repeat(2,1fr);}
+    .stack-cards{height:380px;}
+  }
+  @media (max-width:720px){
+    .nav-pill{display:none;}
+    .menu-toggle{display:flex; flex-shrink:0;}
+    .nav-inner{
+      padding:0 20px;
+      margin: 0 8px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 4rem;
+    }
+    .logo{font-size:16px; gap:8px;}
+    .nav-cta{padding:10px 14px; font-size:13px; gap:6px;}
+    .nav-cta .full{display:none;}
+    .nav-cta .short{display:inline;}
+    .nav-pill.mobile-open{
+      display:flex; flex-direction:column; align-items:stretch; gap:4px;
+      position:absolute; top:78px; left:20px; right:20px;
+      background:#fff; padding:14px; border-radius:20px;
+      box-shadow:0 24px 48px -16px rgba(18,42,58,0.35); z-index:200;
+    }
+    .nav-pill.mobile-open a{padding:13px 16px; text-align:center;}
+    .hero h1{font-size:40px;}
+    .wrap{padding:0 20px;}
+    .occasion-grid{grid-template-columns:1fr;}
+    .pricing{grid-template-columns:1fr;}
+    .timeline-line{display:none;}
+    .timeline-grid{grid-template-columns:1fr; gap:36px;}
+    .trust-bar{flex-direction:column; text-align:center;}
+    .trust-copy{flex-direction:column; text-align:center;}
+    .cta-inner{flex-direction:column; text-align:center; padding:36px 24px;}
+    .footer-bottom{flex-direction:column; align-items:flex-start;}
+
+    /* --- hero visual: stop absolute overlap, stack instead --- */
+    .social-rail{display:none;}
+    .hero-visual{
+      height:auto; position:static;
+      display:flex; flex-direction:column; align-items:center;
+      gap:14px; margin-top:36px; padding-bottom:10px;
+    }
+    .floral{width:260px; height:260px; right:-40px; bottom:-30px; opacity:.6; z-index:0;}
+    .phone{position:static; margin:0 auto;}
+    .phone-save{width:220px; height:320px; padding:26px 20px; animation:none; z-index:2;}
+    .phone-save .names{font-size:28px;}
+    .phone-photo{width:170px; height:250px; padding:16px 14px; animation:none; margin-top:-46px; margin-left:70px; z-index:3;}
+    .badge-float{position:static; margin:0 auto; animation:none; width:fit-content;}
+    .badge-responsive{order:-1;}
+    .badge-custom{margin-top:4px;}
+
+    /* --- section 01 feature cards: stop absolute overlap, stack instead --- */
+    .stack-cards{height:auto; position:static; display:flex; flex-direction:column; gap:16px;}
+    .stack-photo{display:none;}
+    .card-feature{position:static; width:100%;}
+    .card-feature:hover{transform:none;}
+  }
+
+  @media (max-width:420px){
+    .phone-save{width:190px; height:290px;}
+    .phone-photo{width:150px; height:220px; margin-left:55px;}
+    .nav-cta span.short{font-size:12.5px;}
+    .nav-cta{padding:9px 12px;}
+    .logo{font-size:14.5px;}
+    .menu-toggle{width:38px; height:38px;}
+  }
+</style>
 </head>
-
 <body>
 
-  <!-- FONDOS AMBIENTALES -->
-
-  <div class="ambient one"></div>
-  <div class="ambient two"></div>
-  <div class="ambient three"></div>
-
-  <!-- =======================================================
-       NAVBAR
-  ======================================================== -->
-
-  <header class="navbar glass" id="navbar">
-
-<a href="#inicio" class="brand">
-  <span class="brand-mark">i</span>
-  <span>invitio<span>.mx</span></span>
-</a>
-
-<nav class="nav-links" id="navLinks">
-  <a href="#servicios">Servicios</a>
-  <a href="#eventos">Eventos</a>
-  <a href="#proceso">Cómo funciona</a>
-  <a href="#planes">Planes</a>
-</nav>
-
-<a href="#contacto" class="nav-cta">
-  Crear mi invitación
-  <span>↗</span>
-</a>
-
-<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-  <span></span>
-  <span></span>
-</button>
-
-  </header>
-
-  <main id="inicio">
-
-<!-- =====================================================
-     HERO
-====================================================== -->
-
-<section class="section hero">
-
-  <div class="hero-copy reveal">
-
-
-    <h1>
-      Tu momento merece
-      <br>
-      <em>una invitación</em> especial.
-    </h1>
-
-    <p class="hero-text">
-      Diseñamos invitaciones digitales elegantes, modernas y 100% responsivas
-      para que compartas tu celebración de una forma única.
-    </p>
-
-    <div class="hero-actions">
-
-      <a href="#planes" class="button button-primary">
-        Ver invitaciones
-        <span>→</span>
-      </a>
-
-      <a href="#proceso" class="button button-ghost">
-        Descubre cómo funciona
-      </a>
-
-    </div>
-
-    <div class="hero-note">
-
-      <div class="avatars">
-        <span>♡</span>
-        <span>✦</span>
-        <span>∞</span>
-      </div>
-
-      <div>
-        <strong>Hechas para celebrar</strong>
-        <small>
-          Desde una idea hasta una invitación única.
-        </small>
-      </div>
-
-    </div>
-
+<header>
+  <div class="nav-inner">
+    <a href="#" class="logo"><span class="mark">i</span> invitio.mx</a>
+    <nav class="nav-pill">
+      <a href="#" class="active">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#planes">Planes</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <a href="#" class="btn btn-dark nav-cta whatsapp-cta" data-wa-message="¡Hola! Quiero crear mi invitación digital con invitio.mx"><span class="full">Crear mi invitación</span><span class="short">Crear</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button class="menu-toggle" aria-label="Menú"><span></span></button>
   </div>
+</header>
 
+<section class="hero">
+  <div class="wrap">
+    <div class="social-rail">
+      <a href="#" class="whatsapp-cta" data-wa-message="¡Hola! Me interesa crear mi invitación digital con invitio.mx" aria-label="WhatsApp">☎</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="Pinterest">◈</a>
+      <a href="#" aria-label="Más">+</a>
+    </div>
 
-  <!-- MOCKUP -->
-
-  <div class="hero-visual reveal delay-1">
-
-    <div class="invitation-card glass">
-
-      <div class="card-shine"></div>
-
-      <div class="mini-top">
-        <span>INVITATION</span>
-        <span>01 / 26</span>
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Invitaciones digitales</span>
+        <h1>Momentos únicos,<br>invitaciones<br><em>inigualables.</em></h1>
+        <p class="lead">Creamos invitaciones digitales elegantes, modernas y 100% responsivas para que compartas tu celebración de una forma única.</p>
+        <div class="hero-ctas">
+          <a href="#planes" class="btn btn-dark">Ver planes
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#proceso" class="btn btn-outline">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Cómo funciona
+          </a>
+        </div>
+        <div class="social-proof">
+          <div class="avatars">
+            <div class="av">M</div>
+            <div class="av">A</div>
+            <div class="av">L</div>
+            <div class="av plus">+</div>
+          </div>
+          <p class="txt">Miles de celebraciones ya son parte de invitio.mx</p>
+        </div>
       </div>
 
-      <div class="invitation-content">
-
-        <div class="tiny-label">
-          SAVE THE DATE
+      <div class="hero-visual reveal">
+        <div class="floral"></div>
+        <div class="badge-float badge-responsive"><span class="ic">▤</span> 100%<br>Responsivas</div>
+        <div class="phone phone-save">
+          <div class="tag">Save the Date</div>
+          <div class="sub">Nuestra Boda</div>
+          <div class="names">María<br>&amp;<br>Alejandro</div>
+          <div class="leaf-row"></div>
+          <div class="date">18 . 07 . 2027</div>
         </div>
-
-        <h2>
-          María
-          <i>&</i>
-          Alejandro
-        </h2>
-
-        <div class="date-line">
-          <span></span>
-          18 · 07 · 2027
-          <span></span>
+        <div class="phone phone-photo">
+          <div class="content">
+            <p class="small">Nos casamos</p>
+            <p class="date">18 · 07 · 2027<br>Xalapa, Ver.</p>
+          </div>
+          <div class="arrowdot">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#122a3a" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
         </div>
+        <div class="badge-float badge-custom"><span class="ic">✦</span> Diseños<br>personalizados</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <p>
-          Una historia que comienza
-          <br>
-          con un sí.
-        </p>
+<section class="sec-01" id="servicios">
+  <div class="wrap">
+    <div class="grid">
+      <div class="section-head reveal">
+        <h2>Tu evento, nuestra inspiración.</h2>
+        <p>En invitio.mx convertimos los detalles de tu evento en una experiencia digital que tus invitados querrán abrir, explorar y recordar.</p>
+        <a href="#" class="link-arrow">Conoce más sobre nosotros
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="stack-cards reveal">
+        <div class="stack-photo"></div>
+        <div class="card-feature card-1">
+          <div class="icon">◫</div>
+          <h3>Diseño personalizado</h3>
+          <p>Detalles pensados alrededor de tu evento y tu estilo.</p>
+        </div>
+        <div class="card-feature card-2">
+          <div class="icon">▤</div>
+          <h3>100% responsiva</h3>
+          <p>Se adapta perfectamente a celular, tablet y computadora.</p>
+        </div>
+        <div class="card-feature card-3">
+          <div class="icon">◈</div>
+          <h3>Todo digital</h3>
+          <p>Un proceso simple, rápido y sin trámites complicados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <button>
-          VER INVITACIÓN
+<section id="eventos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Hay momentos que merecen una invitación especial.</h2>
+      <p>Elige la categoría de tu evento y mira ejemplos reales de invitaciones para inspirarte antes de crear la tuya.</p>
+    </div>
+    <div class="occasion-grid">
+      <a href="demos/boda.html" class="occ-card occ-1 reveal">
+        <div class="occ-photo">
+          <div class="occ-badge">✦</div>
+          <span class="occ-preview-tag">Save the Date</span>
+          <span class="occ-preview-names">Valentina<br>&amp; Diego</span>
+        </div>
+        <div class="occ-body">
+          <div class="row">
+            <div><h3>Bodas</h3><p>Para decir "Sí, acepto"</p></div>
+            <div class="occ-arrow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </div>
+          </div>
+          <span class="occ-link">Ver demos de boda</span>
+        </div>
+      </a>
+      <a href="demos/baby-shower.html" class="occ-card occ-2 reveal">
+        <div class="occ-photo">
+          <div class="occ-badge">✦</div>
+          <span class="occ-preview-tag">Baby Shower</span>
+          <span class="occ-preview-names">Bienvenida<br>Emilia</span>
+        </div>
+        <div class="occ-body">
+          <div class="row">
+            <div><h3>Baby showers</h3><p>Para dar la bienvenida</p></div>
+            <div class="occ-arrow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </div>
+          </div>
+          <span class="occ-link">Ver demos de baby shower</span>
+        </div>
+      </a>
+      <a href="demos/fiesta-infantil.html" class="occ-card occ-3 reveal">
+        <div class="occ-photo">
+          <div class="occ-badge">◈</div>
+          <span class="occ-preview-tag">Cumpleaños</span>
+          <span class="occ-preview-names">Fiesta de<br>Renata · 7 años</span>
+        </div>
+        <div class="occ-body">
+          <div class="row">
+            <div><h3>Fiestas infantiles</h3><p>Para grandes aventuras</p></div>
+            <div class="occ-arrow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </div>
+          </div>
+          <span class="occ-link">Ver demos de fiesta infantil</span>
+        </div>
+      </a>
+      <a href="demos/celebraciones.html" class="occ-card occ-4 reveal">
+        <div class="occ-photo">
+          <div class="occ-badge">✧</div>
+          <span class="occ-preview-tag">Evento</span>
+          <span class="occ-preview-names">Cena de fin<br>de año</span>
+        </div>
+        <div class="occ-body">
+          <div class="row">
+            <div><h3>Celebraciones</h3><p>Y todo tipo de eventos</p></div>
+            <div class="occ-arrow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </div>
+          </div>
+          <span class="occ-link">Ver demos de celebraciones</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec-03" id="proceso">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:600px; margin:0 auto 60px; text-align:center;">
+      <h2>¿Cómo contratamos y entregamos tu invitación?</h2>
+      <p style="margin:0 auto;">Sin plataformas complicadas ni registros. Tú nos compartes los detalles y nosotros hacemos todo el trabajo.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      <div class="timeline-grid">
+        <div class="tstep reveal">
+          <div class="tstep-circle">01</div>
+          <span class="tstep-kicker"><span class="ic">✎</span> Paso 1 · Selección</span>
+          <h3>Eliges tu paquete y estilo</h3>
+          <p>Nos compartes la fecha, ubicación y el estilo o temática de tu evento.</p>
+          <span class="tstep-pill"><span class="ic">⏱</span> En 5 minutos</span>
+        </div>
+        <div class="tstep reveal">
+          <div class="tstep-circle">02</div>
+          <span class="tstep-kicker"><span class="ic">☎</span> Paso 2 · Datos</span>
+          <h3>Envías tus datos por WhatsApp</h3>
+          <p>Nos mandas fotos, textos y tu lista de familias directamente por WhatsApp.</p>
+          <span class="tstep-pill"><span class="ic">◍</span> Asesor personal 1 a 1</span>
+        </div>
+        <div class="tstep reveal">
+          <div class="tstep-circle">03</div>
+          <span class="tstep-kicker"><span class="ic">↗</span> Paso 3 · Entrega</span>
+          <h3>Recibes tu enlace en 24–48h</h3>
+          <p>Tu invitación digital queda lista para compartir por WhatsApp con todos tus invitados.</p>
+          <span class="tstep-pill"><span class="ic">✓</span> Garantía de satisfacción</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-bar reveal">
+      <div class="trust-copy">
+        <span class="trust-icon">✓</span>
+        <div>
+          <p class="trust-title">Atención personalizada 1 a 1 por WhatsApp</p>
+          <p class="trust-sub">Sin registros ni aplicaciones: un diseñador da seguimiento directo a tu celebración.</p>
+        </div>
+      </div>
+      <a href="#" class="btn btn-dark whatsapp-cta" data-wa-message="¡Hola! Quiero iniciar el pedido de mi invitación digital con invitio.mx">
+        Iniciar pedido por WhatsApp
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec-04" id="planes">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:600px;">
+      <h2>Una invitación hecha para ti.</h2>
+    </div>
+    <div class="grid" style="margin-top:50px;">
+      <div class="phone-mock reveal">
+        <div class="disc"></div>
+        <div class="frame">
+          <div class="screen">
+            <span class="eyebrow" style="margin-bottom:6px;">Baby</span>
+            <h4>Shower</h4>
+            <div class="bear"></div>
+            <p class="date">25 · 05 · 2027</p>
+          </div>
+        </div>
+      </div>
+      <div class="pricing reveal">
+        <div class="price-card light">
+          <div class="price-tag">Plantilla</div>
+          <h3>Esencial</h3>
+          <p class="desc">Parte de un diseño prediseñado y personalízalo con la información de tu evento.</p>
+          <div class="price">$1,299 <span>MXN</span></div>
+          <ul class="price-list">
+            <li><span class="check">✓</span> Diseño prediseñado</li>
+            <li><span class="check">✓</span> Información personalizada</li>
+            <li><span class="check">✓</span> Diseño responsivo</li>
+            <li><span class="check">✓</span> Entrega digital</li>
+          </ul>
+          <a href="#" class="btn btn-dark whatsapp-cta" data-wa-message="¡Hola! Me interesa el plan Esencial ($1,299 MXN). ¿Cómo empezamos?" style="width:100%; justify-content:center;">Elegir plan
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="price-card dark">
+          <span class="popular-badge">Más popular</span>
+          <div class="price-tag">Personalizada</div>
+          <h3>Signature</h3>
+          <p class="desc">Cuéntanos tu idea y creamos una experiencia digital desde cero alrededor de tu celebración.</p>
+          <div class="price">$2,499 <span>MXN</span></div>
+          <ul class="price-list">
+            <li><span class="check">✓</span> Diseño desde cero</li>
+            <li><span class="check">✓</span> Concepto personalizado</li>
+            <li><span class="check">✓</span> 100% responsiva</li>
+            <li><span class="check">✓</span> Experiencia digital a medida</li>
+          </ul>
+          <a href="#" class="btn btn-light whatsapp-cta" data-wa-message="¡Hola! Me interesa el plan Signature ($2,499 MXN). ¿Cómo empezamos?" style="width:100%; justify-content:center;">Elegir plan
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-06" id="ahorro">
+  <div class="wrap">
+    <div class="calc-card reveal">
+      <div class="section-head" style="max-width:560px; margin:0 auto 34px; text-align:center;">
+        <h2>Compara contra la imprenta tradicional.</h2>
+        <p style="margin-bottom:0;">Mueve el control según el número de invitados y descubre cuánto te ahorras al pasarte a lo digital.</p>
+      </div>
+
+      <div class="calc-row">
+        <label for="guestSlider" class="calc-label">
+          <span>Invitados estimados</span>
+          <span id="guestCountDisplay" class="calc-value">120 personas</span>
+        </label>
+        <input type="range" id="guestSlider" min="30" max="400" step="10" value="120" oninput="updateCalculator()">
+        <div class="calc-scale"><span>30</span><span>200</span><span>400+</span></div>
+      </div>
+
+      <div class="calc-compare">
+        <div class="calc-box">
+          <span class="calc-box-label">Imprenta tradicional</span>
+          <span id="paperCostDisplay" class="calc-box-amount">$5,400 MXN</span>
+        </div>
+        <div class="calc-box calc-box-accent">
+          <span class="calc-box-label">Invitación Invitio</span>
+          <span id="tierCostDisplay" class="calc-box-amount">$699 MXN</span>
+        </div>
+      </div>
+
+      <div class="calc-savings">
+        <span class="calc-savings-label">Ahorro estimado</span>
+        <span id="savingsDisplay" class="calc-savings-amount">$4,701 MXN</span>
+        <p>Presupuesto libre para música, fotografía o decoración.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-07" id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head reveal" style="max-width:100%; text-align:center; margin:0 auto 40px;">
+      <span class="eyebrow">06 — Preguntas frecuentes</span>
+      <h2>Todo claro antes de empezar.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>¿Tengo que saber de diseño para pedir mi invitación?</span>
+          <span class="faq-icon">+</span>
         </button>
-
+        <div class="faq-a">
+          <p>Para nada. Solo nos compartes tus datos y fotos por WhatsApp; nosotros diseñamos, programamos tus pases por familia y te entregamos el enlace final listo para enviar.</p>
+        </div>
       </div>
-
-      <div class="mini-bottom">
-        <span>INVITIO.MX</span>
-        <span>♡</span>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>¿Cómo funcionan los pases por familia?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Generamos un enlace único por familia. Al abrirlo, cada invitado ve solo los lugares que le corresponden, así evitas sobrecupo o invitados no contemplados.</p>
+        </div>
       </div>
-
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>¿Qué pasa si cambia el horario o el lugar del evento?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Nos avisas por WhatsApp y lo actualizamos de inmediato. Tus invitados verán la información nueva al abrir el mismo enlace, sin reimpresiones ni confusiones.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>¿Mis invitados necesitan instalar alguna aplicación?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No. La invitación abre al instante en cualquier celular, directo desde WhatsApp, sin apps ni contraseñas.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>¿En cuánto tiempo recibo mi invitación lista?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>La mayoría de los diseños se entregan en 24 a 48 horas después de recibir tus datos completos.</p>
+        </div>
+      </div>
     </div>
 
-
-    <div class="floating-card glass float-one">
-
-      <span class="float-icon">
-        ✦
-      </span>
-
-      <div>
-        <strong>100%</strong>
-        <small>Responsiva</small>
-      </div>
-
-    </div>
-
-
-    <div class="floating-card glass float-two">
-
-      <span class="float-icon sage">
-        ↗
-      </span>
-
-      <div>
-        <strong>Rápida</strong>
-        <small>Entrega digital</small>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     MARQUEE
-====================================================== -->
-
-<div class="marquee-wrap">
-
-  <div class="marquee">
-
-    <span>BODAS</span>
-    <i>✦</i>
-
-    <span>BABY SHOWERS</span>
-    <i>✦</i>
-
-    <span>FIESTAS</span>
-    <i>✦</i>
-
-    <span>CELEBRACIONES</span>
-    <i>✦</i>
-
-    <span>BODAS</span>
-    <i>✦</i>
-
-    <span>BABY SHOWERS</span>
-    <i>✦</i>
-
-    <span>FIESTAS</span>
-    <i>✦</i>
-
-    <span>CELEBRACIONES</span>
-    <i>✦</i>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     SERVICIOS
-====================================================== -->
-
-<section class="section intro" id="servicios">
-
-  <div class="section-heading reveal">
-
-    <span class="section-kicker">
-      01 — LO QUE HACEMOS
-    </span>
-
-    <h2>
-      Una invitación no solo
-      <br>
-      informa. <em>Emociona.</em>
-    </h2>
-
-  </div>
-
-
-  <div class="intro-grid">
-
-    <div class="intro-text reveal">
-
-      <p class="large">
-        En <strong>Invitio.mx</strong> convertimos los detalles de tu evento
-        en una experiencia digital que tus invitados querrán abrir,
-        explorar y recordar.
-      </p>
-
-      <p>
-        Puedes elegir entre nuestras plantillas prediseñadas o contarnos
-        tu idea para crear algo desde cero. Tú compartes los datos de tu
-        celebración; nosotros nos encargamos del diseño.
-      </p>
-
-      <a href="#contacto" class="text-link">
-        Cuéntanos tu idea
+    <div class="faq-cta reveal">
+      <p>¿Tienes otra duda?</p>
+      <a href="#" class="btn btn-dark whatsapp-cta" data-wa-message="¡Hola! Tengo una pregunta sobre las invitaciones digitales de invitio.mx">
+        Escríbenos por WhatsApp
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.3 1.5.2 2-.1.6-.4 1.9-1.1 2.1-1.4l1-1c-.1-.1-.4-.2-.7-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
       </a>
-
     </div>
-
-
-    <div class="feature-stack">
-
-      <article class="feature glass reveal">
-
-        <div class="feature-number">
-          01
-        </div>
-
-        <div>
-          <h3>
-            Diseño personalizado
-          </h3>
-
-          <p>
-            Detalles pensados alrededor de tu evento y tu estilo.
-          </p>
-        </div>
-
-      </article>
-
-
-      <article class="feature glass reveal delay-1">
-
-        <div class="feature-number">
-          02
-        </div>
-
-        <div>
-          <h3>
-            100% responsiva
-          </h3>
-
-          <p>
-            Se adapta perfectamente a celular, tablet y computadora.
-          </p>
-        </div>
-
-      </article>
-
-
-      <article class="feature glass reveal delay-2">
-
-        <div class="feature-number">
-          03
-        </div>
-
-        <div>
-          <h3>
-            Todo digital
-          </h3>
-
-          <p>
-            Un proceso simple, rápido y sin trámites complicados.
-          </p>
-        </div>
-
-      </article>
-
-    </div>
-
   </div>
-
 </section>
 
-
-<!-- =====================================================
-     EVENTOS
-====================================================== -->
-
-<section class="section events" id="eventos">
-
-  <div class="section-heading centered reveal">
-
-    <span class="section-kicker">
-      02 — PARA CADA OCASIÓN
-    </span>
-
-    <h2>
-      Hay momentos que merecen
-      <br>
-      <em>una entrada especial.</em>
-    </h2>
-
-  </div>
-
-
-  <div class="event-grid">
-
-    <article class="event-card wedding reveal">
-      <div class="event-overlay"></div>
-      <span class="event-index"></span>
-
-      <div>
-        <span class="event-label"> PARA DECIR</span>
-        <h3>“Sí, acepto.”</h3>
-        <p> Invitaciones para bodas </p>
+<section class="cta-banner">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <div class="cta-text">
+        <h2>Los momentos especiales comienzan con una invitación.</h2>
+        <p class="mini">invitio.mx</p>
       </div>
-
-    </article>
-
-
-    <article class="event-card baby reveal delay-1">
-
-      <div class="event-overlay"></div>
-      <span class="event-index"> </span>
-
-      <div>
-        <span class="event-label">
-          PARA DAR LA
-        </span>
-
-        <h3>
-          Bienvenida
-        </h3>
-
-        <p>
-          Baby showers y bautizos
-        </p>
-      </div>
-
-    </article>
-
-
-    <article class="event-card party reveal delay-2">
-      <div class="event-overlay"></div>
-      <span class="event-index"></span>
-      <div>
-        <span class="event-label">
-          PARA CELEBRAR
-        </span>
-
-        <h3>
-          A lo grande.
-        </h3>
-
-        <p>
-          Fiestas y celebraciones
-        </p>
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     PROCESO
-====================================================== -->
-
-<section class="section process" id="proceso">
-
-  <div class="process-card glass reveal">
-
-    <div class="process-heading">
-
-      <span class="section-kicker">
-        03 — ASÍ DE SIMPLE
-      </span>
-
-      <h2>
-        De tu idea
-        <br>
-        <em>a tu invitación.</em>
-      </h2>
-
-      <p>
-        Sin procesos complicados. Solo comparte los detalles
-        y nosotros hacemos el resto.
-      </p>
-
-    </div>
-
-
-    <div class="steps">
-
-      <div class="step">
-
-        <span>01</span>
-
-        <h3>
-          Cuéntanos
-        </h3>
-
-        <p>
-          Comparte los datos, fecha, ubicación y estilo
-          de tu evento.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <span>02</span>
-
-        <h3>
-          Diseñamos
-        </h3>
-
-        <p>
-          Elegimos una plantilla o creamos una propuesta
-          desde cero.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <span>03</span>
-
-        <h3>
-          Publicamos
-        </h3>
-
-        <p>
-          Recibes tu invitación digital lista para compartir.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     PLANES
-====================================================== -->
-
-<section class="section plans" id="planes">
-
-  <div class="section-heading reveal">
-
-    <span class="section-kicker">
-      04 — ELIGE TU ESTILO
-    </span>
-
-    <h2>
-      Una invitación hecha
-      <br>
-      <em>para ti.</em>
-    </h2>
-
-  </div>
-
-
-  <div class="plans-grid">
-
-    <article class="plan glass reveal">
-
-      <div class="plan-top">
-        <span>PLANTILLA</span>
-      </div>
-
-      <h3>
-        Esencial
-      </h3>
-
-      <p class="plan-description">
-        Parte de un diseño prediseñado y personalízalo
-        con la información de tu evento.
-      </p>
-
-      <ul>
-        <li>Diseño prediseñado</li>
-        <li>Información personalizada</li>
-        <li>Diseño responsivo</li>
-        <li>Entrega digital</li>
-      </ul>
-
-      <a href="#contacto" class="plan-link">
-        Quiero este estilo
-        <span>→</span>
+      <a href="#" class="btn btn-dark whatsapp-cta" data-wa-message="¡Hola! Quiero crear mi invitación digital con invitio.mx">Crear mi invitación
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-
-    </article>
-
-
-    <article class="plan plan-featured glass reveal delay-1">
-
-      <div class="featured-tag">
-        A TU MEDIDA
-      </div>
-
-      <div class="plan-top">
-        <span>PERSONALIZADA</span>
-      </div>
-
-      <h3>
-        Signature
-      </h3>
-
-      <p class="plan-description">
-        Cuéntanos tu idea y creamos una experiencia digital
-        desde cero alrededor de tu celebración.
-      </p>
-
-      <ul>
-        <li>Diseño desde cero</li>
-        <li>Concepto personalizado</li>
-        <li>100% responsiva</li>
-        <li>Experiencia digital a medida</li>
-      </ul>
-
-      <a href="#contacto" class="plan-link">
-        Crear mi invitación
-        <span>→</span>
-      </a>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     FRASE
-====================================================== -->
-
-<section class="section quote-section">
-
-  <div class="quote glass reveal">
-
-    <span class="quote-mark">
-      “
-    </span>
-
-    <blockquote>
-      Los momentos especiales
-      <br>
-      comienzan con una invitación.
-    </blockquote>
-
-    <span class="quote-brand">
-      INVITIO.MX
-    </span>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACTO
-====================================================== -->
-
-<section class="section contact" id="contacto">
-
-  <div class="contact-card reveal">
-
-    <div>
-
-      <span class="section-kicker">
-        05 — HABLEMOS
-      </span>
-
-      <h2>
-        ¿Ya tienes
-        <br>
-        <em>una idea?</em>
-      </h2>
-
-      <p>
-        Cuéntanos qué estás celebrando y empecemos
-        a crear tu invitación.
-      </p>
-
     </div>
-
-
-    <div class="contact-actions">
-
-      <a
-        href="mailto:invitiomx@gmail.com"
-        class="button button-light"
-      >
-        Escribir por email
-        <span>↗</span>
-      </a>
-
-      <a
-        href="https://www.instagram.com/invitio.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="social-link"
-      >
-        Instagram
-        <span>↗</span>
-      </a>
-
-      <small>
-        Atención digital · 24 horas · 7 días
-      </small>
-
-    </div>
-
   </div>
-
 </section>
-```
 
-  </main>
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a href="#" class="logo"><span class="mark">i</span> invitio.mx</a>
+      <p>Invitaciones digitales para momentos inolvidables.</p>
+      <div class="footer-icons">
+        <a href="mailto:invitiomx@gmail.com" aria-label="Correo">✉</a>
+        <a href="#" aria-label="Instagram">◎</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Invitio.mx. Todos los derechos reservados.</p>
+      <p>Xalapa, Veracruz, México.</p>
+      <a href="#" class="to-top" aria-label="Subir">↑</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- =======================================================
-       FOOTER
-  ======================================================== -->
+<a href="#" class="wa-float whatsapp-cta" data-wa-message="¡Hola! Vengo de invitio.mx y me gustaría más información." aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.3 1.5.2 2-.1.6-.4 1.9-1.1 2.1-1.4l1-1c-.1-.1-.4-.2-.7-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+</a>
 
-  <footer>
-
-```
-<div class="footer-brand">
-
-  <span class="brand-mark">
-    i
-  </span>
-
-  <span>
-    invitio<span>.mx</span>
-  </span>
-
-</div>
-
-<p>
-  Invitaciones digitales para momentos inolvidables.
-</p>
-
-<span>
-  © <span id="year"></span> Invitio.mx
-</span>
-```
-
-  </footer>
-
-  <!-- =======================================================
-       JAVASCRIPT
-  ======================================================== -->
-
-  <script>
-
-    /* =========================================================
-       NAVBAR — SCROLL
-    ========================================================= */
-
-    const navbar = document.getElementById("navbar");
-
-    window.addEventListener("scroll", () => {
-
-      if (window.scrollY > 30) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
       }
-
     });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
 
-
-    /* =========================================================
-       MOBILE MENU
-    ========================================================= */
-
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-
-    menuToggle.addEventListener("click", () => {
-
-      navLinks.classList.toggle("mobile-open");
-
-      menuToggle.classList.toggle("active");
-
+  // Nav active state on click
+  document.querySelectorAll('.nav-pill a:not(.nav-cta)').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      document.querySelectorAll('.nav-pill a:not(.nav-cta)').forEach(a=>a.classList.remove('active'));
+      link.classList.add('active');
     });
+  });
 
-
-    document.querySelectorAll(".nav-links a").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        navLinks.classList.remove("mobile-open");
-        menuToggle.classList.remove("active");
-
-      });
-
+  // Mobile menu toggle -> simple slide down nav
+  const toggle = document.querySelector('.menu-toggle');
+  const pill = document.querySelector('.nav-pill');
+  toggle.addEventListener('click', ()=>{
+    const isOpen = pill.classList.toggle('mobile-open');
+    toggle.classList.toggle('is-active', isOpen);
+  });
+  pill.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      pill.classList.remove('mobile-open');
+      toggle.classList.remove('is-active');
     });
+  });
 
-
-    /* =========================================================
-       SCROLL REVEAL
-    ========================================================= */
-
-    const revealObserver = new IntersectionObserver(
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
-            revealObserver.unobserve(entry.target);
-
-          }
-
-        });
-
-      },
-      {
-        threshold: .12
-      }
-    );
-
-
-    document.querySelectorAll(".reveal").forEach(element => {
-
-      revealObserver.observe(element);
-
+  // WhatsApp communication: every element with .whatsapp-cta opens a pre-filled chat
+  const WHATSAPP_PHONE = '5212281234567';
+  function openWhatsApp(message){
+    const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener');
+  }
+  document.querySelectorAll('.whatsapp-cta').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const msg = el.getAttribute('data-wa-message') || '¡Hola! Quiero más información sobre invitio.mx';
+      openWhatsApp(msg);
     });
+  });
 
-
-    /* =========================================================
-       TILT EFFECT — EVENT CARDS
-    ========================================================= */
-
-    document.querySelectorAll(".event-card, .plan, .feature")
-      .forEach(card => {
-
-        card.addEventListener("mousemove", event => {
-
-          if (window.innerWidth < 800) return;
-
-          const rect = card.getBoundingClientRect();
-
-          const x =
-            (event.clientX - rect.left) /
-            rect.width -
-            .5;
-
-          const y =
-            (event.clientY - rect.top) /
-            rect.height -
-            .5;
-
-          card.style.transform = `
-            perspective(900px)
-            rotateX(${y * -3}deg)
-            rotateY(${x * 3}deg)
-            translateY(-5px)
-          `;
-
-        });
-
-
-        card.addEventListener("mouseleave", () => {
-
-          card.style.transform = "";
-
-        });
-
-      });
-
-
-    /* =========================================================
-       PARALLAX SUAVE DEL HERO
-    ========================================================= */
-
-    const heroVisual =
-      document.querySelector(".hero-visual");
-
-    window.addEventListener("mousemove", event => {
-
-      if (!heroVisual || window.innerWidth < 900) return;
-
-      const x =
-        (event.clientX / window.innerWidth - .5) * 10;
-
-      const y =
-        (event.clientY / window.innerHeight - .5) * 10;
-
-      heroVisual.style.transform =
-        `translate(${x}px, ${y}px)`;
-
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-q').forEach(b=>b.setAttribute('aria-expanded','false'));
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
     });
+  });
 
+  // Savings calculator
+  const guestSlider = document.getElementById('guestSlider');
+  function updateCalculator(){
+    if(!guestSlider) return;
+    const guests = parseInt(guestSlider.value, 10);
+    const paperCost = Math.round(guests * 45);
+    const digitalCost = 699;
+    const savings = Math.max(0, paperCost - digitalCost);
+    document.getElementById('guestCountDisplay').textContent = `${guests} personas`;
+    document.getElementById('paperCostDisplay').textContent = `$${paperCost.toLocaleString('es-MX')} MXN`;
+    document.getElementById('tierCostDisplay').textContent = `$${digitalCost.toLocaleString('es-MX')} MXN`;
+    document.getElementById('savingsDisplay').textContent = `$${savings.toLocaleString('es-MX')} MXN`;
+  }
+  updateCalculator();
 
-    /* =========================================================
-       AÑO AUTOMÁTICO
-    ========================================================= */
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
-
-    /* =========================================================
-       SUAVIZAR ANCLAS
-    ========================================================= */
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-      anchor.addEventListener("click", function(event) {
-
-        const target =
-          document.querySelector(this.getAttribute("href"));
-
-        if (!target) return;
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      });
-
-    });
-
-  </script>
-
+  // Sticky header subtle shrink
+  const headerEl = document.querySelector('header');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 40){
+      headerEl.style.paddingTop = '12px';
+    } else {
+      headerEl.style.paddingTop = '22px';
+    }
+  });
+</script>
 </body>
 </html>
